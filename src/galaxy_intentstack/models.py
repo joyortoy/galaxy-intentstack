@@ -30,6 +30,7 @@ class Message(Model):
     session: str = Field(min_length=1, max_length=200)
     text: str = Field(min_length=1, max_length=12000)
     source_type: Literal["message", "memory", "tool", "agent"] = "message"
+    source_ref: str | None = Field(default=None, max_length=1000)
     references: tuple[str, ...] = Field(default=(), max_length=32)
     action: Action | None = None
 
@@ -37,6 +38,7 @@ class Message(Model):
 class Claim(Model):
     id: str
     source_identity: str
+    upstream_source_ref: str | None = None
     source_type: str
     evidence_references: tuple[str, ...]
     timestamp: float

@@ -1,4 +1,5 @@
 """Atomic SQLite storage; audit records contain commitments, never raw message text."""
+
 import hashlib
 import json
 import re
@@ -16,8 +17,11 @@ def digest(value):
 
 def sanitize(text):
     # Evidence is content storage, separate from operational audit. Reject common secret shapes.
-    if re.search(r"(?i)(bearer\s+\S+|sk-(?:proj-)?[a-z0-9_-]{12,}|"
-                 r"(?:password|api[_-]?key|secret|token)\s*[:=]\s*\S+)", text):
+    if re.search(
+        r"(?i)(bearer\s+\S+|sk-(?:proj-)?[a-z0-9_-]{12,}|"
+        r"(?:password|api[_-]?key|secret|token)\s*[:=]\s*\S+)",
+        text,
+    ):
         raise ValueError("Secret-like content must be removed before ingestion")
     return text
 
@@ -57,7 +61,7 @@ class Store:
                 id TEXT PRIMARY KEY, principal TEXT NOT NULL, kind TEXT NOT NULL,
                 resource TEXT NOT NULL, scope TEXT NOT NULL, session TEXT NOT NULL,
                 starts REAL NOT NULL, expires REAL NOT NULL, approval INTEGER NOT NULL,
-                revoked INTEGER NOT NULL DEFAULT 0);
+                revoked INTEGER NOT NULL DEFAULT 0, binding TEXT NOT NULL DEFAULT '');
             CREATE TABLE IF NOT EXISTS approvals(
                 grant_id TEXT PRIMARY KEY REFERENCES grants(id),
                 approver TEXT NOT NULL, expires REAL NOT NULL);
@@ -69,6 +73,10 @@ class Store:
             CREATE TRIGGER IF NOT EXISTS events_no_delete BEFORE DELETE ON events
               BEGIN SELECT RAISE(ABORT,'append-only events'); END;
             """)
+
+            columns = {row[1] for row in c.execute("PRAGMA table_info(grants)")}
+            if "binding" not in columns:
+                c.execute("ALTER TABLE grants ADD COLUMN binding TEXT NOT NULL DEFAULT ''")
 
     @contextmanager
     def connection(self):
@@ -91,15 +99,18 @@ class Store:
         previous = previous[0] if previous else "0" * 64
         encoded = canonical(payload)
         hashed = digest([kind, encoded, previous])
-        return c.execute("INSERT INTO events(kind,payload,previous,hash) VALUES(?,?,?,?)",
-                         (kind, encoded, previous, hashed)).lastrowid
+        return c.execute(
+            "INSERT INTO events(kind,payload,previous,hash) VALUES(?,?,?,?)",
+            (kind, encoded, previous, hashed),
+        ).lastrowid
 
     def verify_audit(self):
         with self.connection() as c:
             previous = "0" * 64
             for row in c.execute("SELECT * FROM events ORDER BY id"):
                 if row["previous"] != previous or row["hash"] != digest(
-                        [row["kind"], row["payload"], previous]):
+                    [row["kind"], row["payload"], previous]
+                ):
                     return False
                 previous = row["hash"]
         return True

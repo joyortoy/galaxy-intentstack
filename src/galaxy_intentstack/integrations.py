@@ -1,4 +1,5 @@
 """Read-only boundary adapters, no network access or canonical memory writes."""
+
 from .models import Interpretation, Message
 
 
@@ -13,8 +14,13 @@ def memory_result(record, *, store_id, session):
         raise ValueError("Memory ID, revision, text and source_ref required")
     if record["revision"] < 1 or not store_id:
         raise ValueError("Invalid memory revision or source store")
-    return Message(event_id=f"{store_id}:{record['id']}:{record['revision']}",
-                   session=session, text=record["text"], source_type="memory")
+    return Message(
+        event_id=f"{store_id}:{record['id']}:{record['revision']}",
+        session=session,
+        text=record["text"],
+        source_type="memory",
+        source_ref=record["source_ref"],
+    )
 
 
 def classifier_output(result, evidence_id):
@@ -22,12 +28,14 @@ def classifier_output(result, evidence_id):
     label = result.get("intent")
     if not isinstance(label, str) or not 1 <= len(label) <= 100:
         raise ValueError("Bounded intent label required")
-    return Interpretation(description="Classifier suggestion: " + label,
-                          evidence_references=(evidence_id,))
+    return Interpretation(
+        description="Classifier suggestion: " + label, evidence_references=(evidence_id,)
+    )
 
 
 def agent_action(request):
     from .models import Action
+
     return Action.model_validate(request)
 
 
@@ -40,5 +48,9 @@ def audit_events(engine, *, after_id=0, limit=100):
     if not 1 <= limit <= 256 or after_id < 0:
         raise ValueError("Bounded cursor and limit required")
     with engine.store.connection() as c:
-        return [dict(r) for r in c.execute(
-            "SELECT * FROM events WHERE id>? ORDER BY id LIMIT ?", (after_id, limit))]
+        return [
+            dict(r)
+            for r in c.execute(
+                "SELECT * FROM events WHERE id>? ORDER BY id LIMIT ?", (after_id, limit)
+            )
+        ]
