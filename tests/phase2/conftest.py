@@ -189,7 +189,9 @@ resource_budgets: max_runtime_seconds=30; max_files_changed=0
             received_at=datetime.now(UTC).isoformat(),
         )
     )
-    commands = ("/usr/bin/python3 verify.py",)
+    options = request.param if hasattr(request, "param") and isinstance(request.param, dict) else {}
+    commands = tuple(options.get("commands", ("/usr/bin/python3 verify.py",)))
+    (root / "verify_two.py").write_text("assert 9 * 9 == 81\n")
     kernel = JoyLangKernel()
     if not kernel.available():
         raise RuntimeError("BLOCKED: existing built JoyLang kernel is required; no fallback")
@@ -197,13 +199,15 @@ resource_budgets: max_runtime_seconds=30; max_files_changed=0
     contract.write_text(
         "joy 0.2\nid: galaxy-readonly-review\n\nintent\n"
         "  outcome: Verify the isolated snapshot and retain it for review\n\nproof\n"
-        "  test: /usr/bin/python3 verify.py\n"
-        "  human: independent_review_completed\n"
+        + "".join("  test: " + command + "\n" for command in commands)
+        + "  human: independent_review_completed\n"
     )
     admitted = kernel.admit_file(contract)
     assert admitted["ok"] is True
     admitted_spec = admitted["spec"]
-    test_obligation = next(p for p in admitted_spec["proof"] if p["class"] == "test")
+    test_obligations = {
+        p["id"]: p["require"] for p in admitted_spec["proof"] if p["class"] == "test"
+    }
 
     proposal = propose_action(
         compiled_intent=compiled,
@@ -252,9 +256,7 @@ resource_budgets: max_runtime_seconds=30; max_files_changed=0
         commands=commands,
         grant=native,
         admitted_spec=admitted_spec if getattr(request, "param", True) else None,
-        test_obligation_commands={test_obligation["id"]: commands[0]}
-        if getattr(request, "param", True)
-        else {},
+        test_obligation_commands=test_obligations if getattr(request, "param", True) else {},
         current_intent_revision=compiled.revision,
         current_policy_revision=native.policy_revision,
         timeout_seconds=30,

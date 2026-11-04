@@ -8,7 +8,7 @@ from datetime import UTC, datetime
 from .conftest import remember, retrieve, submit
 
 
-def complete_with_retained_claims(f):
+def complete_with_retained_claims(f, *, expect_receipt=True):
     lease = f.agent.claim()
     assert lease is not None
 
@@ -78,6 +78,8 @@ def complete_with_retained_claims(f):
             },
         )
     row = f.plane.snapshot_verifications.get(f.plan.organisation_id, lease["job_id"])
+    if not expect_receipt:
+        return lease, outcome, row
     assert row["state"] == "receipted", row["error"]
     receipt = json.loads(row["receipt_json"])
     assert receipt["passed"] is True, row["receipt_json"]

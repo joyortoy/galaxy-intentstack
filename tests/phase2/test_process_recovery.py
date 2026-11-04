@@ -45,6 +45,11 @@ def crash_worker(phase, data):
         with engine.store.connection() as c:
             engine.store.event(c, "uncommitted_probe", {"probe": "rollback"})
             os._exit(94)
+    elif phase == "dependency-invalidation":
+        engine.beliefs.retract(data["revocation_evidence_id"])
+        os._exit(96)
+    elif phase == "native-dependency-revoke":
+        integration.revocations.flush(after_native_revoke=lambda: os._exit(97))
     elif phase == "execution-observed":
         integration.observe(
             operation_id="operation-1",
@@ -70,6 +75,8 @@ def killed(f, phase, expected):
             "device_token": f.device_token,
         },
     }
+    if hasattr(f, "revocation_probe_evidence"):
+        data["revocation_evidence_id"] = f.revocation_probe_evidence
     child = multiprocessing.get_context("spawn").Process(target=crash_worker, args=(phase, data))
     child.start()
     child.join(20)

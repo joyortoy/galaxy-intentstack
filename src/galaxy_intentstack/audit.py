@@ -76,6 +76,22 @@ class Store:
                 endpoint TEXT NOT NULL, user_id TEXT NOT NULL, session TEXT NOT NULL,
                 memory_id TEXT NOT NULL, revision INTEGER NOT NULL, claim_id TEXT NOT NULL,
                 PRIMARY KEY(endpoint,user_id,session,memory_id,revision));
+            CREATE TABLE IF NOT EXISTS execution_dependencies(
+                controller_ref TEXT NOT NULL, organisation_id TEXT NOT NULL,
+                grant_id TEXT NOT NULL, operation_id TEXT NOT NULL, session TEXT NOT NULL,
+                binding_json TEXT NOT NULL, event_id INTEGER NOT NULL REFERENCES events(id),
+                PRIMARY KEY(controller_ref,organisation_id,grant_id));
+            CREATE TABLE IF NOT EXISTS execution_dependency_links(
+                controller_ref TEXT NOT NULL, organisation_id TEXT NOT NULL,
+                grant_id TEXT NOT NULL, belief_id TEXT NOT NULL REFERENCES beliefs(id),
+                PRIMARY KEY(controller_ref,organisation_id,grant_id,belief_id));
+            CREATE INDEX IF NOT EXISTS execution_dependency_belief ON execution_dependency_links(belief_id);
+            CREATE TABLE IF NOT EXISTS dependency_revocations(
+                controller_ref TEXT NOT NULL, organisation_id TEXT NOT NULL,
+                grant_id TEXT NOT NULL, operation_id TEXT NOT NULL,
+                trigger_event_id INTEGER NOT NULL REFERENCES events(id),
+                acknowledged INTEGER NOT NULL DEFAULT 0, attempts INTEGER NOT NULL DEFAULT 0,
+                error_type TEXT, PRIMARY KEY(controller_ref,organisation_id,grant_id));
             CREATE TABLE IF NOT EXISTS integration_observations(
                 id TEXT PRIMARY KEY, operation_id TEXT NOT NULL, payload TEXT NOT NULL);
             CREATE TABLE IF NOT EXISTS integration_operations(
@@ -135,6 +151,10 @@ class Store:
         from .delivery import enqueue
 
         enqueue(c, c.execute("SELECT * FROM events WHERE id=?", (event_id,)).fetchone())
+        if kind == "belief_revision" and payload["status"] != "active":
+            from .revocation import enqueue_invalidations
+
+            enqueue_invalidations(self, c, payload["belief_id"], event_id)
         return event_id
 
     def verify_audit(self):

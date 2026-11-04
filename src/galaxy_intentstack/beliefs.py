@@ -133,6 +133,19 @@ class Beliefs:
             },
         )
 
+        # A direct typed claim correction must invalidate its graph support just as a
+        # message-level contradiction/retraction does. Positive verification never revives nodes.
+        if claim.validity != "active" or claim.state in (State.DISPUTED, State.REFUTED):
+            status = (
+                "disputed"
+                if claim.state == State.DISPUTED
+                else ("superseded" if claim.validity == "superseded" else "invalid")
+            )
+            for row in c.execute(
+                "SELECT id FROM beliefs WHERE claim_id=? AND status='active'", (claim.id,)
+            ).fetchall():
+                self.invalidate(c, row[0], "claim support invalidated", status)
+
     def retract(self, evidence_id):
         with self.store.connection() as c:
             if c.execute("UPDATE evidence SET valid=0 WHERE id=?", (evidence_id,)).rowcount != 1:

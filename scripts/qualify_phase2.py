@@ -39,6 +39,7 @@ def main():
     probe.parent.mkdir(parents=True, exist_ok=True, mode=0o700)
     env = dict(os.environ)
     env["GALAXY_PHASE2_DEMO_REPORT"] = str(output / "integration-demo.json")
+    env["GALAXY_REVOCATION_DEMO_REPORT"] = str(output / "revocation-demo.json")
     run(
         [
             sys.executable,
@@ -104,6 +105,29 @@ def main():
     )
     if json.loads(verification).get("status") != "verified":
         raise SystemExit("FAILED: authenticated audit verification did not return verified")
+    revoked = json.loads((output / "revocation-demo.json").read_text())
+    if (
+        not revoked.get("native_revoked")
+        or revoked["worker_attempts"] != 0
+        or revoked["pending_before_forwarding"] != 1
+        or revoked["revocation"]["native_acknowledged"] != 1
+    ):
+        raise SystemExit(
+            "FAILED: dependency revocation demonstration did not establish the required boundary"
+        )
+    revoked_verification = run(
+        [
+            str(Path(sys.executable).with_name("joy-evidence")),
+            "verify",
+            "--ledger",
+            revoked["audit_ledger_path"],
+            "--key",
+            revoked["audit_key_path"],
+        ],
+        output / "independent-revocation-audit-verification.txt",
+    )
+    if json.loads(revoked_verification).get("status") != "verified":
+        raise SystemExit("FAILED: revocation audit did not independently verify")
     print("Qualification evidence saved: " + str(output))
     print("Physical attestation and production qualification remain NOT ESTABLISHED.")
 

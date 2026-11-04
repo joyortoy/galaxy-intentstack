@@ -208,6 +208,12 @@ class JoyCtlController:
 class Integration:
     def __init__(self, engine, controller, delivery):
         self.engine, self.controller, self.delivery = engine, controller, delivery
+        from .revocation import RevocationDelivery, install_dependency_authority
+
+        self.dependency_authority = install_dependency_authority(controller.plane, engine.store)
+        self.revocations = RevocationDelivery(
+            engine.store, self.dependency_authority, controller.plan.organisation_id
+        )
 
     def submit(
         self,
@@ -243,6 +249,22 @@ class Integration:
                     ).fetchone()
                     if not belief or belief["status"] != "active":
                         raise IntegrationDenied("Required belief is stale, disputed or absent")
+                if not old:
+                    _, native_grant = self.controller.validate(human_token, device_token, action)
+                    from .revocation import bind_dependencies
+
+                    try:
+                        bind_dependencies(
+                            self.engine.store,
+                            c,
+                            plane=self.controller.plane,
+                            plan=self.controller.plan,
+                            grant=native_grant,
+                            operation_id=operation_id,
+                            session=session,
+                        )
+                    except ValueError as exc:
+                        raise IntegrationDenied("Native grant dependency binding denied") from exc
                 if not old:
                     c.execute(
                         "INSERT INTO integration_operations VALUES(?,?,?,'prepared',NULL,?)",
