@@ -1,0 +1,26 @@
+[
+  {
+    "module": "galaxy_intentstack.engine",
+    "installed_path": "/home/sam/galaxy-intentstack-dev-20261105/.venv-phase2/lib/python3.13/site-packages/galaxy_intentstack/engine.py",
+    "sha256": "d124085dbbad074b6c9ed53f15c97a6a0597ace8ed9bef17afc1f0c91b5df51c",
+    "matches_working_source": true
+  },
+  {
+    "module": "galaxy_intentstack.controller",
+    "installed_path": "/home/sam/galaxy-intentstack-dev-20261105/.venv-phase2/lib/python3.13/site-packages/galaxy_intentstack/controller.py",
+    "sha256": "c38b930bfb03178f2dedeee0e38493177323dbfbc888a6a6e5e69aa513b6647c",
+    "matches_working_source": true
+  },
+  {
+    "module": "galaxy_intentstack.delivery",
+    "installed_path": "/home/sam/galaxy-intentstack-dev-20261105/.venv-phase2/lib/python3.13/site-packages/galaxy_intentstack/delivery.py",
+    "sha256": "8b16f4a36e5b3480dac059b56f464e80320049f6f392be21646445086f10dc6e",
+    "matches_working_source": true
+  },
+  {
+    "module": "galaxy_intentstack.retrieval",
+    "installed_path": "/home/sam/galaxy-intentstack-dev-20261105/.venv-phase2/lib/python3.13/site-packages/galaxy_intentstack/retrieval.py",
+    "sha256": "b3a2b254969510e9046be444367a69b460fa64070b8c011ee7049f56284cf21e",
+    "matches_working_source": true
+  }
+]

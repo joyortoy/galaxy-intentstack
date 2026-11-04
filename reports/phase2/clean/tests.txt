@@ -1,0 +1,19 @@
+........................................................................ [ 77%]
+.....................                                                    [100%]
+=============================== warnings summary ===============================
+tests/phase2/test_native_sandbox.py::test_real_retrieval_authorization_custody_and_native_sandbox
+tests/phase2/test_native_sandbox.py::test_kill_after_sandbox_execution_before_authenticated_audit
+tests/phase2/test_native_sandbox.py::test_native_revocation_prevents_worker_lease
+tests/phase2/test_real_boundaries.py::test_01_real_http_retrieval_then_native_authorized_queue
+tests/phase2/test_real_boundaries.py::test_10_11_crash_after_controller_commit_before_local_receipt
+tests/phase2/test_real_boundaries.py::test_11b_native_single_use_rejects_different_operation
+tests/phase2/test_real_boundaries.py::test_11b_native_single_use_rejects_different_operation
+  /home/sam/galaxy-intentstack-dev-20261105/.venv-phase2/lib/python3.13/site-packages/galaxy_intentstack/controller.py:140: DeprecationWarning: hosted queue_execution(instruction=...) is deprecated; compile via prompt_compiler and pass prompt_id
+    return self.plane.queue_execution(
+
+tests/phase2/test_real_boundaries.py::test_transport_error_after_controller_commit_is_uncertain_then_reconciled
+  /home/sam/galaxy-intentstack-dev-20261105/tests/phase2/test_real_boundaries.py:557: DeprecationWarning: hosted queue_execution(instruction=...) is deprecated; compile via prompt_compiler and pass prompt_id
+    actual(*args, **kwargs)
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+93 passed, 8 warnings in 68.38s (0:01:08)

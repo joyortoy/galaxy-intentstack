@@ -1,5 +1,8 @@
 # Threat model and limitations
 
+This document describes the Phase 1 compatibility layer. For the implemented Phase 2 real
+integration and current boundaries, see [Phase 2 architecture](phase2-architecture.md).
+
 ## Boundary
 
 External text, retrieved documents, memories and agent outputs are untrusted. The trusted host

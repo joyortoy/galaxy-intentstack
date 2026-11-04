@@ -1,0 +1,31 @@
+{
+  "method": "fresh spawned interpreter terminated with os._exit at each named boundary",
+  "tests": [
+    {
+      "test": "test_kill_after_sandbox_execution_before_authenticated_audit",
+      "seconds": 2.507,
+      "passed": true
+    },
+    {
+      "test": "test_process_kill_after_preparation_requires_current_authority",
+      "seconds": 1.28,
+      "passed": true
+    },
+    {
+      "test": "test_process_kill_after_controller_commit_creates_only_one_job",
+      "seconds": 1.509,
+      "passed": true
+    },
+    {
+      "test": "test_process_kill_after_ledger_commit_does_not_duplicate_delivery",
+      "seconds": 1.257,
+      "passed": true
+    },
+    {
+      "test": "test_process_kill_during_local_write_rolls_back_evidence_and_outbox",
+      "seconds": 1.195,
+      "passed": true
+    }
+  ],
+  "all_passed": true
+}

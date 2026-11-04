@@ -1,0 +1,69 @@
+{
+  "modules": [
+    {
+      "module": "intentstack.data_agent",
+      "source": "/home/sam/intentstack-production/current/IntentStack/src/intentstack/data_agent.py",
+      "installed": "/home/sam/galaxy-intentstack-dev-20261105/.venv-phase2/lib/python3.13/site-packages/intentstack/data_agent.py",
+      "sha256": "711e2b7adb190019928c13c6257880219548b8d291506e9e71fff53be473796a",
+      "source_matches_installed": true
+    },
+    {
+      "module": "intentstack.retrieval",
+      "source": "/home/sam/intentstack-production/current/IntentStack/src/intentstack/retrieval.py",
+      "installed": "/home/sam/galaxy-intentstack-dev-20261105/.venv-phase2/lib/python3.13/site-packages/intentstack/retrieval.py",
+      "sha256": "528ec213df89874e78f07ad55e54994752fc3c55ac716f74e2c23f2bed2bfc92",
+      "source_matches_installed": true
+    },
+    {
+      "module": "joyctl.policy",
+      "source": "/home/sam/joyctl/src/joyctl/policy.py",
+      "installed": "/home/sam/galaxy-intentstack-dev-20261105/.venv-phase2/lib/python3.13/site-packages/joyctl/policy.py",
+      "sha256": "02dfad7f106fa59fe7bfdea6d96a967bc28515d858c502fda65a781edca228b3",
+      "source_matches_installed": true
+    },
+    {
+      "module": "joyctl.hosted",
+      "source": "/home/sam/joyctl/src/joyctl/hosted.py",
+      "installed": "/home/sam/galaxy-intentstack-dev-20261105/.venv-phase2/lib/python3.13/site-packages/joyctl/hosted.py",
+      "sha256": "90ce7002db1122720c44f712672a041808d976b80ddad331bf792a67208562b2",
+      "source_matches_installed": true
+    },
+    {
+      "module": "joyctl.runtime.hosted_policy_lifecycle",
+      "source": "/home/sam/joyctl/src/joyctl/runtime/hosted_policy_lifecycle.py",
+      "installed": "/home/sam/galaxy-intentstack-dev-20261105/.venv-phase2/lib/python3.13/site-packages/joyctl/runtime/hosted_policy_lifecycle.py",
+      "sha256": "2b2db7b7b4ed0367d21767991780b3a179d84373389e956fb4e7fc4c8e793a47",
+      "source_matches_installed": true
+    },
+    {
+      "module": "joyevidence.ledger",
+      "source": "/home/sam/intentstack-production/current/JoyEvidence/src/joyevidence/ledger.py",
+      "installed": "/home/sam/galaxy-intentstack-dev-20261105/.venv-phase2/lib/python3.13/site-packages/joyevidence/ledger.py",
+      "sha256": "91541a8f28aaae5a20507f3b70112a1968e628e53bb3f406aa954901e6501068",
+      "source_matches_installed": true
+    }
+  ],
+  "joymux_binary_sha256": "4e427af571dab1cc0804c5dad15ab9707e2ebf707ac4231bc363ec27772ef49f",
+  "upstream_repositories": [
+    {
+      "path": "/home/sam/joyctl",
+      "head": "959d8b1df1840656202b44189c631acd6962218b",
+      "dirty_entries": 245
+    },
+    {
+      "path": "/home/sam/joymux",
+      "head": "3642ff86c70805340b885b0eacc5295fea8a744d",
+      "dirty_entries": 46
+    },
+    {
+      "path": "/home/sam/intentstack-production/current/IntentStack",
+      "head": "5a9aa05ab8584cb09c34a8bf3b4822138abf36b5",
+      "dirty_entries": 0
+    },
+    {
+      "path": "/home/sam/intentstack-production/current/JoyEvidence",
+      "head": "5a9aa05ab8584cb09c34a8bf3b4822138abf36b5",
+      "dirty_entries": 0
+    }
+  ]
+}

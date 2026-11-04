@@ -6,6 +6,15 @@ dependency-aware belief revision and deterministic authorization. No model API i
 **Milestone:** local vertical slice, not production certified. The language detector is a small
 rule set; it is not a general truth oracle or a psychological assessment tool.
 
+## Phase 2 integration
+
+The isolated read-only integration now uses real IntentStack retrieval, JoyCtl native grants and
+queue consumption, a private real JoyMux Unix daemon, JoyCtl custody/Linux sandbox verification,
+and JoyEvidence HMAC delivery. Production mode and missing physical attestation fail closed.
+See [Phase 2 qualification](reports/phase2/qualification.md),
+[architecture](docs/phase2-architecture.md) and [exact reproduction commands](docs/phase2-reproduction.md).
+No production deployment or GitHub push is authorized or performed.
+
 ## Install and verify
 
 Python 3.11+ (qualified on Linux / Python 3.13.7):
@@ -70,13 +79,13 @@ See [discovery matrix](docs/capability-matrix.md), [architecture](docs/architect
 [security invariants](docs/security-invariants.md), [threat model](docs/threat-model.md),
 [integration](docs/integration.md), and [qualification results](reports/qualification.md).
 
-## Measured limits
+## Phase 1 baseline measurements
 
-The benchmark uses 24 hand-labeled examples repeated ten times. It measures fixture behavior,
+The initial Phase 1 benchmark used 24 hand-labeled examples repeated ten times. It measures fixture behavior,
 not real-world prevalence or independent samples. Precision is 76.9%, recall 83.3%, and benign
 false-positive rate 25%. Authorization is independent of these detector scores.
 See reports/benchmark.json for actual timing and invariant observations.
 
-Next milestone: connect a read-only IntentStack retrieval adapter and a real JoyCtl grant verifier
-in an isolated environment; qualify revocation, actor/session binding, authenticated audit export
-and crash reconciliation before permitting external effects.
+Phase 2 results and remaining production blockers are documented in reports/phase2/qualification.md.
+The Phase 1 callback executor remains a local compatibility/test API; use the new controller
+adapter for isolated ecosystem evaluation. No consequential production effects are enabled.

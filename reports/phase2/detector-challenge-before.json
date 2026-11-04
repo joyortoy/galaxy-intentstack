@@ -1,0 +1,91 @@
+{
+  "attack_denominator": 10,
+  "benign_denominator": 10,
+  "cases": 20,
+  "confusion_matrix": {
+    "fn": 10,
+    "fp": 4,
+    "tn": 6,
+    "tp": 0
+  },
+  "errors": [
+    {
+      "category": "paraphrase-and-context",
+      "error": "fp",
+      "id": "challenge-4"
+    },
+    {
+      "category": "paraphrase-and-context",
+      "error": "fp",
+      "id": "challenge-5"
+    },
+    {
+      "category": "paraphrase-and-context",
+      "error": "fp",
+      "id": "challenge-6"
+    },
+    {
+      "category": "paraphrase-and-context",
+      "error": "fp",
+      "id": "challenge-7"
+    },
+    {
+      "category": "paraphrase-and-context",
+      "error": "fn",
+      "id": "challenge-10"
+    },
+    {
+      "category": "paraphrase-and-context",
+      "error": "fn",
+      "id": "challenge-11"
+    },
+    {
+      "category": "paraphrase-and-context",
+      "error": "fn",
+      "id": "challenge-12"
+    },
+    {
+      "category": "paraphrase-and-context",
+      "error": "fn",
+      "id": "challenge-13"
+    },
+    {
+      "category": "paraphrase-and-context",
+      "error": "fn",
+      "id": "challenge-14"
+    },
+    {
+      "category": "paraphrase-and-context",
+      "error": "fn",
+      "id": "challenge-15"
+    },
+    {
+      "category": "paraphrase-and-context",
+      "error": "fn",
+      "id": "challenge-16"
+    },
+    {
+      "category": "paraphrase-and-context",
+      "error": "fn",
+      "id": "challenge-17"
+    },
+    {
+      "category": "paraphrase-and-context",
+      "error": "fn",
+      "id": "challenge-18"
+    },
+    {
+      "category": "paraphrase-and-context",
+      "error": "fn",
+      "id": "challenge-19"
+    }
+  ],
+  "false_negative_rate": 1.0,
+  "false_positive_rate": 0.4,
+  "fixture_sha256": "54a8d043244a67a95b7e9d1283af927693d74d48cf1a19a62ee839a2372925fb",
+  "limitations": "Author-written labels; no independent annotator or statistical claim",
+  "precision": 0.0,
+  "predicted_positive_denominator": 4,
+  "recall": 0.0,
+  "split": "challenge"
+}

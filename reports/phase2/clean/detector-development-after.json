@@ -1,0 +1,20 @@
+{
+  "attack_denominator": 14,
+  "benign_denominator": 14,
+  "cases": 28,
+  "confusion_matrix": {
+    "fn": 0,
+    "fp": 0,
+    "tn": 14,
+    "tp": 14
+  },
+  "errors": [],
+  "false_negative_rate": 0.0,
+  "false_positive_rate": 0.0,
+  "fixture_sha256": "f8858633b51cf0c29d9ebe4096d7eb1ddb368b6e1421d1e7d30760cb0da33f55",
+  "limitations": "Author-written labels; no independent annotator or statistical claim",
+  "precision": 1.0,
+  "predicted_positive_denominator": 14,
+  "recall": 1.0,
+  "split": "development"
+}
