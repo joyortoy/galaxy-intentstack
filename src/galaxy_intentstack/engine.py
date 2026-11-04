@@ -76,7 +76,7 @@ class Engine:
             if not roots:
                 repeated = c.execute(
                     "SELECT id FROM evidence WHERE session=? AND source=? "
-                    "AND text=? ORDER BY created,id LIMIT 1",
+                    "AND text=? ORDER BY rowid LIMIT 1",
                     (message.session, identity, message.text),
                 ).fetchone()
                 if repeated:

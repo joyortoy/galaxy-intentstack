@@ -181,6 +181,8 @@ def test_repetition_preserves_original_root(engine):
     b = send(engine, "Same unsupported claim", event="b")
     assert a.extracted_claims[0].original_roots == b.extracted_claims[0].original_roots
     assert b.extracted_claims[0].state == State.REPORTED
+    third = send(engine, "Same unsupported claim", event="c")
+    assert third.extracted_claims[0].original_roots == a.extracted_claims[0].original_roots
 
 
 def test_citation_is_dependent_on_original_belief(engine):

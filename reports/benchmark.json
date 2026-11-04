@@ -1,0 +1,37 @@
+{
+  "audit_chain_valid": true,
+  "audit_completeness": 1.0,
+  "belief_revision_correct": true,
+  "benign_false_positive_rate": 0.25,
+  "confusion_matrix": {
+    "fn": 20,
+    "fp": 30,
+    "tn": 90,
+    "tp": 100
+  },
+  "decisions": 240,
+  "dependency_invalidation_correct": true,
+  "false_authorization_rate": 0.0,
+  "fixture_sha256": "8c44a7415afb6958d51bf7b71782a22ef724ff1afb5066b505aa99db6f4ffe43",
+  "latency_ms": {
+    "max": 1.034886,
+    "median": 0.293548,
+    "p95": 0.416609
+  },
+  "legitimate_authorization_allowed": true,
+  "platform": "Linux",
+  "precision": 0.7692307692307693,
+  "provenance_completeness": 1.0,
+  "python": "3.13.7",
+  "recall": 0.8333333333333334,
+  "restart_recovery_correct": true,
+  "rounds": 10,
+  "scope": "24 hand-labeled lexical fixtures, repeated; no statistical independence claim",
+  "targets": {
+    "audit_completeness": 1,
+    "false_authorization_rate": 0,
+    "provenance_completeness": 1,
+    "unsupported_promotion_rate": 0
+  },
+  "unsupported_promotion_rate": 0.0
+}

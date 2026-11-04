@@ -1,0 +1,82 @@
+# Galaxy IntentStack
+
+A working local integrity layer for AI agents: durable evidence, conservative interpretation,
+dependency-aware belief revision and deterministic authorization. No model API is required.
+
+**Milestone:** local vertical slice, not production certified. The language detector is a small
+rule set; it is not a general truth oracle or a psychological assessment tool.
+
+## Install and verify
+
+Python 3.11+ (qualified on Linux / Python 3.13.7):
+
+```sh
+python3 -m venv .venv
+.venv/bin/python -m pip install -r requirements-dev.lock
+.venv/bin/python -m pip install -e . --no-deps
+.venv/bin/python -m pytest -q
+.venv/bin/ruff check src tests benchmarks
+.venv/bin/ruff format --check src tests benchmarks
+```
+
+The optional real IntentStack classifier contract test skips if that separate package is absent.
+All eight required scenarios and core security tests work offline after dependencies are installed.
+The lock file pins the dependencies used for qualification; it is not a cross-platform wheel lock.
+
+## Reproduce the demonstration
+
+Choose a new database path on every run:
+
+```sh
+.venv/bin/galaxy-demo --db /tmp/galaxy-demo-fresh.db > /tmp/galaxy-decisions.jsonl
+.venv/bin/python benchmarks/run.py --rounds 10 > /tmp/galaxy-benchmark.json
+```
+
+The demo covers all eight scenarios, including a queued ALLOW followed by revocation and a blocked
+local execution. Inspect JSON lines, the graph snapshot, and the SQLite database. A previous
+decision is historical evidence, not an execution token.
+
+## Library use
+
+```python
+from galaxy_intentstack import Engine, Message
+
+engine = Engine("integrity.db")
+decision = engine.process(Message(
+    event_id="message-1",
+    session="authenticated-host-assigned-session",
+    text="Every galaxy began as something too small to notice.",
+))
+print(decision.model_dump_json(indent=2))
+```
+
+Results include claims with epistemic state, source and root provenance, candidate interpretations,
+uncertain manipulation indicators, contradictions, an independent authorization result, decision,
+explanation and audit ID. ALLOW, DENY, CLARIFY, ABSTAIN and ESCALATE are distinct outcomes.
+
+Only trusted host code may enroll identities, configure source trust, grant permissions, verify
+claims or approve actions. Do not expose those methods as content-driven tools. A grant binds the
+complete typed action (including belief conditions), principal, resource, scope, session and expiry.
+Independent approval is enforced when the operator marks a grant as requiring approval.
+
+## Existing system boundaries
+
+IntentStack remains canonical memory. JoyCtl remains the execution-grant authority. JoyMux remains
+the runtime; use hooks / Unix sockets, never JoyMux MCP. Galaxy's ALLOW is an additional local gate,
+not a substitute for these systems' policies or grants. No production services or databases were
+changed and no upstream proprietary code was copied.
+
+See [discovery matrix](docs/capability-matrix.md), [architecture](docs/architecture.md),
+[security invariants](docs/security-invariants.md), [threat model](docs/threat-model.md),
+[integration](docs/integration.md), and [qualification results](reports/qualification.md).
+
+## Measured limits
+
+The benchmark uses 24 hand-labeled examples repeated ten times. It measures fixture behavior,
+not real-world prevalence or independent samples. Precision is 76.9%, recall 83.3%, and benign
+false-positive rate 25%. Authorization is independent of these detector scores.
+See reports/benchmark.json for actual timing and invariant observations.
+
+Next milestone: connect a read-only IntentStack retrieval adapter and a real JoyCtl grant verifier
+in an isolated environment; qualify revocation, actor/session binding, authenticated audit export
+and crash reconciliation before permitting external effects.
