@@ -89,9 +89,10 @@ The adapter intentionally rejects production controller mode. Device credentials
 attestation, and attestation-required plans fail closed. Audit sink acknowledgment is to a separate
 local JoyEvidence Ledger, not a remote service; remote_acknowledged=false is explicit.
 
-Queueing currently uses JoyCtl's deprecated instruction compatibility path, which compiles and
-persists before acceptance. Migrating to the production prompt_id/admitted-plan path remains
-required. No native grant fence is held across command execution.
+The original Phase 2 qualification used the deprecated instruction compatibility path. The
+compiled-plan follow-up now requires pinned prompt_id/admitted-plan bindings and real semantic
+admission; see compiled-plan.md. Production identity/attestation qualification remains open.
+No native grant fence is held across command execution.
 
 Galaxy belief checks are additional vetoes at queue acceptance. Production must bind subsequent
 dependency changes to the owning controller's revocation/dispatch boundary before allowing

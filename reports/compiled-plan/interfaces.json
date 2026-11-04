@@ -1,0 +1,38 @@
+{
+  "modules": [
+    {
+      "module": "galaxy_intentstack.controller",
+      "path": "/home/sam/galaxy-intentstack-compiled-plan-20261105/.venv-phase2/lib/python3.13/site-packages/galaxy_intentstack/controller.py",
+      "sha256": "e9f3b25ac3f9bc36d922899a814542329d1db44dd306303d40a877df03864ef0"
+    },
+    {
+      "module": "joyctl.prompt_compiler.store",
+      "path": "/home/sam/galaxy-intentstack-compiled-plan-20261105/.venv-phase2/lib/python3.13/site-packages/joyctl/prompt_compiler/store.py",
+      "sha256": "3626537518bcc9a81af9012976c629a73081e588e87d4ed1625df28d67187c4b"
+    },
+    {
+      "module": "joyctl.prompt_compiler.service",
+      "path": "/home/sam/galaxy-intentstack-compiled-plan-20261105/.venv-phase2/lib/python3.13/site-packages/joyctl/prompt_compiler/service.py",
+      "sha256": "ac78b341148335caf7ff126a030485f31adf782360402c6e5367a7cd6ca8b1cd"
+    },
+    {
+      "module": "joyctl.runtime.intake.service",
+      "path": "/home/sam/galaxy-intentstack-compiled-plan-20261105/.venv-phase2/lib/python3.13/site-packages/joyctl/runtime/intake/service.py",
+      "sha256": "2bae72af788f94531cd30eac8f948b0ea724b1fc6e4686a9f3e00f871558b3e0"
+    },
+    {
+      "module": "joyctl.runtime.intake.plan_results",
+      "path": "/home/sam/galaxy-intentstack-compiled-plan-20261105/.venv-phase2/lib/python3.13/site-packages/joyctl/runtime/intake/plan_results.py",
+      "sha256": "f27e6b4bc0e43e114ef1a2dd050937d08d9ce598d9cebd2d4189515a9fc093f2"
+    },
+    {
+      "module": "joyctl.joylang_kernel",
+      "path": "/home/sam/galaxy-intentstack-compiled-plan-20261105/.venv-phase2/lib/python3.13/site-packages/joyctl/joylang_kernel.py",
+      "sha256": "5185203306e22bb442fd6a4094cf7b08bdf4e97c08c99a260afaeff568bcb78b"
+    }
+  ],
+  "joylang_cli": "/home/sam/.local/share/joy-multihost/universe-migration-20260906/packages/025-joylang/restored/data/dist/cli.js",
+  "joylang_cli_sha256": "a6da2deb37dd858134660f15982cadbc6b9bdab1c7b008a0d4305d226a8f3f3d",
+  "kernel_available": true,
+  "installed_controller_matches_source": true
+}

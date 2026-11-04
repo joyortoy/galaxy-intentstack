@@ -5,7 +5,8 @@ The local read-only integration is qualified under its tested conditions. The fo
 
 1. Production controller mode. The adapter currently refuses it. Replace the development HMAC
    login boundary with the existing production OIDC/audience authority in an approved isolated
-   rehearsal, and port queueing to the compiled prompt_id/admitted-plan path. No production
+   rehearsal. The compiled prompt_id/admitted-plan queue path is now qualified in the isolated
+   follow-up (docs/compiled-plan.md); production OIDC remains unqualified. No production
    credentials were requested, copied or used.
 2. Physical device/agent attestation. The real native receipt says NOT_ESTABLISHED. Maintain the
    fail-closed requirement; qualify through the owning JoyMux custody/attestation authority.

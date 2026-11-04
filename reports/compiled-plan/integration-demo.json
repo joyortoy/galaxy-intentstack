@@ -1,0 +1,122 @@
+{
+  "audit_key_path": "/home/sam/galaxy-intentstack-compiled-plan-20261105/work/phase2-qualification-2cbe05647b9e4da7914c60f429fd05a5/test_real_retrieval_authorizat0/sink.key",
+  "audit_ledger_path": "/home/sam/galaxy-intentstack-compiled-plan-20261105/work/phase2-qualification-2cbe05647b9e4da7914c60f429fd05a5/test_real_retrieval_authorizat0/sink.db",
+  "audit_verification": {
+    "head_mac": "895ff9c6a50234b9b081e67e638663accd743ca93334e6aecd6af89344aac6b8",
+    "records": 7,
+    "status": "verified"
+  },
+  "dispatch": {
+    "audit": {
+      "local_persisted": 6,
+      "pending": 0,
+      "remote_acknowledged": false,
+      "sink": "existing_local_joyevidence_hmac_ledger",
+      "sink_acknowledged": 6
+    },
+    "authority": "JoyCtl",
+    "controller_accepted": true,
+    "decision": "ALLOW",
+    "executed": false,
+    "job_id": "job_b5e0f43931f244509ea911217d67bdb9",
+    "job_state": "queued",
+    "physical_attestation": "NOT_ESTABLISHED"
+  },
+  "joymux_transport": "isolated real Unix socket",
+  "native_receipt": {
+    "aggregate_input_set_sha256": "4116d69e28b0fa5e568f385c8e80a1f95de7416322b255edb7d3d564f60249b9",
+    "binding": {
+      "attempt_id": "attempt_execution_5e388538d38f404e83b0abe110677c49_1",
+      "domain": "conventional_snapshot_verification",
+      "execution_id": "execution_5e388538d38f404e83b0abe110677c49",
+      "mission_id": "mission_0eb4c1fc9da1413e8ad48f3b2bd18675",
+      "producer": "joyctl-hosted-verifier",
+      "scope": "isolated-snapshot:b9523d245dabb8505d4d693673459af28e571ae8c8071c43954e4864931e4436",
+      "version": "hosted-snapshot-verifier/v1"
+    },
+    "claims": [
+      {
+        "claim_sha256": "3f5fe93355feb06710b0ebb56fec5331bdedb364c03609fd30efadc5cc041379",
+        "envelope_sha256": "5eae8cf65b9b0d73c3566664ee757f5551db94b120c739118c53eb1810f5da4e",
+        "reference": "artifact_5eae8cf65b9b0d73c3566664ee757f5551db94b120c739118c53eb1810f5da4e"
+      },
+      {
+        "claim_sha256": "0d19c9dd1e3fa08d874024532c2c37e36b718bc2badc98b3457b2717485b6c8e",
+        "envelope_sha256": "66d032970d8e20c7b8d93debb8708038bf5885e8c2fad953fd77eaaeeebd7e7b",
+        "reference": "artifact_66d032970d8e20c7b8d93debb8708038bf5885e8c2fad953fd77eaaeeebd7e7b"
+      }
+    ],
+    "commands": [
+      "/usr/bin/python3 verify.py"
+    ],
+    "executable_fingerprints": [
+      [
+        "/usr/bin/python3",
+        "/usr/bin/python3.13",
+        66306,
+        30933474,
+        493,
+        "efb29ce53d36ebaeee80e3aa44fd6c7f9d71bbded5fe1665240b2ed8ecaeee0e"
+      ]
+    ],
+    "grant_id": "grant_51c935ca7c7f438da32860e9d9008f7d",
+    "isolation_profile": "joyctl.local-pair-ipc.v2",
+    "job_id": "job_b5e0f43931f244509ea911217d67bdb9",
+    "organisation_id": "org_0a9a50b2491746a78eaac0d5b92fba10",
+    "passed": true,
+    "physical_attestation": "NOT_ESTABLISHED",
+    "receipts": [
+      {
+        "command": "/usr/bin/python3 verify.py",
+        "cwd": "/home/sam/galaxy-intentstack-compiled-plan-20261105/work/phase2-qualification-2cbe05647b9e4da7914c60f429fd05a5/test_real_retrieval_authorizat0/source",
+        "exit_code": 0,
+        "failure": null,
+        "kernel_socket_isolation": {
+          "filter_sha256": "260eccfff65444ba8c4f6cc8096025d01ce561599b6d0ef7d4e5831321cf5d41",
+          "ipc": "local-stream-and-seqpacket-pairs-only",
+          "library_version": "2.6.0",
+          "native_arch": 3221225534,
+          "profile": "joyctl.local-pair-ipc.v2"
+        },
+        "sandbox": "linux-bwrap-readonly-no-network-v1",
+        "stderr": "",
+        "stderr_log": {
+          "path": "/home/sam/galaxy-intentstack-compiled-plan-20261105/work/phase2-qualification-2cbe05647b9e4da7914c60f429fd05a5/test_real_retrieval_authorizat0/controller.db.evidence/verification-logs/d9a88510b8f9bf979426710fe75993ab912f08406688f4d77994ef524c2b8df8/stderr-yn97i2uu.log",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "size_bytes": 0
+        },
+        "stdout": "",
+        "stdout_log": {
+          "path": "/home/sam/galaxy-intentstack-compiled-plan-20261105/work/phase2-qualification-2cbe05647b9e4da7914c60f429fd05a5/test_real_retrieval_authorizat0/controller.db.evidence/verification-logs/d9a88510b8f9bf979426710fe75993ab912f08406688f4d77994ef524c2b8df8/stdout-cs53fley.log",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "size_bytes": 0
+        }
+      }
+    ],
+    "schema": "joyctl.snapshot-verification-receipt/v1",
+    "semantic_acceptance": false,
+    "source_after": "b9523d245dabb8505d4d693673459af28e571ae8c8071c43954e4864931e4436",
+    "source_before": "b9523d245dabb8505d4d693673459af28e571ae8c8071c43954e4864931e4436",
+    "verification_plan_sha256": "018680dd9df3f7dd4873406901ae1639ee3c61f8df94e6b10130afa5f5e1120d"
+  },
+  "observation": {
+    "audit": {
+      "local_persisted": 7,
+      "pending": 0,
+      "remote_acknowledged": false,
+      "sink": "existing_local_joyevidence_hmac_ledger",
+      "sink_acknowledged": 7
+    },
+    "execution_id": "execution_5e388538d38f404e83b0abe110677c49",
+    "job_id": "job_b5e0f43931f244509ea911217d67bdb9",
+    "job_state": "failed",
+    "operation_id": "operation-1",
+    "physical_attestation": "NOT_ESTABLISHED",
+    "receipt_commitment": "efa26f2b53b05b0451c28f086c8699d21fbf336ae75b486c16a0dae9f76779a5",
+    "sandbox_execution_observed": true,
+    "sandbox_passed": true,
+    "semantic_acceptance": false
+  },
+  "production_integration_qualified": false,
+  "source": "real localhost IntentStack DataAgent"
+}

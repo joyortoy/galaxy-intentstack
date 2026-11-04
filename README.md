@@ -6,6 +6,14 @@ dependency-aware belief revision and deterministic authorization. No model API i
 **Milestone:** local vertical slice, not production certified. The language detector is a small
 rule set; it is not a general truth oracle or a psychological assessment tool.
 
+## Compiled-plan follow-up
+
+The follow-up replaces raw instruction queueing with pinned compiled prompts linked to the
+admitted JoyCtl plan. Tenant-scoped prompt reads, prompt tampering checks and real JoyLang
+semantic-contract admission are exercised without granting semantic completion or physical
+attestation. See [details and reproduction](docs/compiled-plan.md) and
+[qualification](reports/compiled-plan/qualification.md).
+
 ## Phase 2 integration
 
 The isolated read-only integration now uses real IntentStack retrieval, JoyCtl native grants and
