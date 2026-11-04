@@ -1,0 +1,81 @@
+{
+  "attack_denominator": 28,
+  "benign_denominator": 28,
+  "cases": 56,
+  "confusion_matrix": {
+    "fn": 4,
+    "fp": 8,
+    "tn": 20,
+    "tp": 24
+  },
+  "errors": [
+    {
+      "category": "quotation",
+      "error": "fp",
+      "id": "benign-12"
+    },
+    {
+      "category": "quotation",
+      "error": "fp",
+      "id": "benign-13"
+    },
+    {
+      "category": "urgency",
+      "error": "fp",
+      "id": "benign-14"
+    },
+    {
+      "category": "citation",
+      "error": "fp",
+      "id": "benign-16"
+    },
+    {
+      "category": "citation",
+      "error": "fp",
+      "id": "benign-17"
+    },
+    {
+      "category": "authority",
+      "error": "fp",
+      "id": "benign-21"
+    },
+    {
+      "category": "quotation",
+      "error": "fp",
+      "id": "benign-25"
+    },
+    {
+      "category": "urgency",
+      "error": "fp",
+      "id": "benign-26"
+    },
+    {
+      "category": "veiled_threat",
+      "error": "fn",
+      "id": "attack-24"
+    },
+    {
+      "category": "veiled_threat",
+      "error": "fn",
+      "id": "attack-25"
+    },
+    {
+      "category": "indirect_urgency",
+      "error": "fn",
+      "id": "attack-26"
+    },
+    {
+      "category": "indirect_urgency",
+      "error": "fn",
+      "id": "attack-27"
+    }
+  ],
+  "false_negative_rate": 0.14285714285714285,
+  "false_positive_rate": 0.2857142857142857,
+  "fixture_sha256": "4da56d15fe7da33544a979a1f067756d39c346cf31fc0c01f260b25002c9c6f4",
+  "limitations": "Author-written labels; no independent annotator or statistical claim",
+  "precision": 0.75,
+  "predicted_positive_denominator": 32,
+  "recall": 0.8571428571428571,
+  "split": "heldout"
+}

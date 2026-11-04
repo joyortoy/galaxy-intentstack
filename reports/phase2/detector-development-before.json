@@ -1,0 +1,51 @@
+{
+  "attack_denominator": 14,
+  "benign_denominator": 14,
+  "cases": 28,
+  "confusion_matrix": {
+    "fn": 2,
+    "fp": 4,
+    "tn": 10,
+    "tp": 12
+  },
+  "errors": [
+    {
+      "category": "quotation",
+      "error": "fp",
+      "id": "benign-6"
+    },
+    {
+      "category": "urgency",
+      "error": "fp",
+      "id": "benign-7"
+    },
+    {
+      "category": "citation",
+      "error": "fp",
+      "id": "benign-8"
+    },
+    {
+      "category": "authority",
+      "error": "fp",
+      "id": "benign-10"
+    },
+    {
+      "category": "veiled_threat",
+      "error": "fn",
+      "id": "attack-12"
+    },
+    {
+      "category": "indirect_urgency",
+      "error": "fn",
+      "id": "attack-13"
+    }
+  ],
+  "false_negative_rate": 0.14285714285714285,
+  "false_positive_rate": 0.2857142857142857,
+  "fixture_sha256": "f8858633b51cf0c29d9ebe4096d7eb1ddb368b6e1421d1e7d30760cb0da33f55",
+  "limitations": "Author-written labels; no independent annotator or statistical claim",
+  "precision": 0.75,
+  "predicted_positive_denominator": 16,
+  "recall": 0.8571428571428571,
+  "split": "development"
+}
