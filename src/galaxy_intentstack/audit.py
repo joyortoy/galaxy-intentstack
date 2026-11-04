@@ -2,9 +2,11 @@
 
 import hashlib
 import json
+import os
 import re
 import sqlite3
 from contextlib import contextmanager
+from pathlib import Path
 
 
 def canonical(value):
@@ -29,6 +31,15 @@ def sanitize(text):
 class Store:
     def __init__(self, path):
         self.path = str(path)
+        file = Path(self.path)
+        file.parent.mkdir(parents=True, exist_ok=True, mode=0o700)
+        try:
+            descriptor = os.open(file, os.O_CREAT | os.O_EXCL | os.O_WRONLY, 0o600)
+        except FileExistsError:
+            pass
+        else:
+            os.close(descriptor)
+        file.chmod(0o600)
         with self.connection() as c:
             c.executescript("""
             PRAGMA journal_mode=WAL;
@@ -52,6 +63,24 @@ class Store:
             CREATE TABLE IF NOT EXISTS requests(
                 session TEXT NOT NULL, id TEXT NOT NULL, fingerprint TEXT NOT NULL,
                 decision TEXT NOT NULL, PRIMARY KEY(session,id));
+            CREATE TABLE IF NOT EXISTS delivery_meta(
+                singleton INTEGER PRIMARY KEY CHECK(singleton=1), source TEXT NOT NULL,
+                user_id TEXT NOT NULL, actor_id TEXT NOT NULL);
+            CREATE TABLE IF NOT EXISTS audit_outbox(
+                event_id INTEGER PRIMARY KEY REFERENCES events(id), envelope TEXT NOT NULL,
+                acknowledged INTEGER NOT NULL DEFAULT 0, receipt TEXT);
+            CREATE TABLE IF NOT EXISTS retrieval_snapshots(
+                session TEXT NOT NULL, request_id TEXT NOT NULL, binding TEXT NOT NULL,
+                payload TEXT NOT NULL, commitment TEXT NOT NULL, PRIMARY KEY(session,request_id));
+            CREATE TABLE IF NOT EXISTS memory_versions(
+                endpoint TEXT NOT NULL, user_id TEXT NOT NULL, session TEXT NOT NULL,
+                memory_id TEXT NOT NULL, revision INTEGER NOT NULL, claim_id TEXT NOT NULL,
+                PRIMARY KEY(endpoint,user_id,session,memory_id,revision));
+            CREATE TABLE IF NOT EXISTS integration_observations(
+                id TEXT PRIMARY KEY, operation_id TEXT NOT NULL, payload TEXT NOT NULL);
+            CREATE TABLE IF NOT EXISTS integration_operations(
+                id TEXT PRIMARY KEY, binding TEXT NOT NULL, session TEXT NOT NULL,
+                state TEXT NOT NULL, job_id TEXT, plan TEXT NOT NULL);
             CREATE TABLE IF NOT EXISTS principals(
                 id TEXT PRIMARY KEY, token_hash TEXT UNIQUE NOT NULL, capabilities TEXT NOT NULL,
                 active INTEGER NOT NULL DEFAULT 1);
@@ -99,10 +128,14 @@ class Store:
         previous = previous[0] if previous else "0" * 64
         encoded = canonical(payload)
         hashed = digest([kind, encoded, previous])
-        return c.execute(
+        event_id = c.execute(
             "INSERT INTO events(kind,payload,previous,hash) VALUES(?,?,?,?)",
             (kind, encoded, previous, hashed),
         ).lastrowid
+        from .delivery import enqueue
+
+        enqueue(c, c.execute("SELECT * FROM events WHERE id=?", (event_id,)).fetchone())
+        return event_id
 
     def verify_audit(self):
         with self.connection() as c:

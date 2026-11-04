@@ -25,11 +25,24 @@ class Action(Model):
     belief_ids: tuple[str, ...] = Field(default=(), max_length=32)
 
 
+class MemoryProvenance(Model):
+    store_id: str = Field(min_length=1, max_length=100)
+    user_id: str = Field(min_length=1, max_length=100)
+    actor_id: str = Field(min_length=1, max_length=100)
+    memory_id: str = Field(min_length=1, max_length=100)
+    revision: int = Field(ge=1)
+    created_at: float = Field(ge=0, allow_inf_nan=False)
+    updated_at: float = Field(ge=0, allow_inf_nan=False)
+    upstream_status: str = Field(max_length=100)
+    revision_recorded: bool
+
+
 class Message(Model):
     event_id: str = Field(min_length=1, max_length=200)
     session: str = Field(min_length=1, max_length=200)
     text: str = Field(min_length=1, max_length=12000)
     source_type: Literal["message", "memory", "tool", "agent"] = "message"
+    memory_provenance: MemoryProvenance | None = None
     source_ref: str | None = Field(default=None, max_length=1000)
     references: tuple[str, ...] = Field(default=(), max_length=32)
     action: Action | None = None
@@ -38,6 +51,7 @@ class Message(Model):
 class Claim(Model):
     id: str
     source_identity: str
+    memory_provenance: MemoryProvenance | None = None
     upstream_source_ref: str | None = None
     source_type: str
     evidence_references: tuple[str, ...]

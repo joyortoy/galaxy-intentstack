@@ -7,3 +7,8 @@ __pycache__/
 *.db-*
 build/
 dist/
+
+work/
+
+.venv-phase2/
+.venv-core-check/

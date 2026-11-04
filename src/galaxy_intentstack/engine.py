@@ -2,6 +2,7 @@ import logging
 import re
 import time
 import uuid
+from contextlib import nullcontext
 
 from .analysis import assess, interpret, requested_action
 from .audit import Store, canonical, digest, sanitize
@@ -27,16 +28,19 @@ class Engine:
         self.authority = Authority(self.store, clock)
         self.beliefs = Beliefs(self.store, clock)
 
-    def process(self, message: Message, *, source="anonymous", token=None):
+    def process(self, message: Message, *, source="anonymous", token=None, _connection=None):
         sanitize(message.text)
         if message.source_ref:
             sanitize(message.source_ref)
-        with self.store.connection() as c:
+        with nullcontext(_connection) if _connection is not None else self.store.connection() as c:
             principal = self.authority.authenticate(c, token)
             identity = principal["id"] if principal else source
             # Authentication participates in idempotency, without retaining credentials.
+            request_payload = message.model_dump()
+            if message.memory_provenance is None:
+                request_payload.pop("memory_provenance")  # preserve Phase 1 replay fingerprints
             fingerprint = digest(
-                [message.model_dump(), identity, bool(principal), digest(token) if token else None]
+                [request_payload, identity, bool(principal), digest(token) if token else None]
             )
             replay = c.execute(
                 "SELECT * FROM requests WHERE session=? AND id=?",
@@ -100,6 +104,7 @@ class Engine:
                 id=claim_id,
                 source_identity=identity,
                 upstream_source_ref=message.source_ref,
+                memory_provenance=message.memory_provenance,
                 source_type=message.source_type,
                 evidence_references=tuple(sorted(refs)),
                 timestamp=self.clock(),
@@ -146,7 +151,7 @@ class Engine:
                     c, message.session, "message:" + message.event_id, digest(message.text), claim
                 )
             indicators = assess(message.text, evidence_id, message.source_type)
-            if message.references:
+            if message.references and any(i.pattern == "unsupported_promotion" for i in indicators):
                 # A derived/model restatement is not independent corroboration.
                 from .models import Indicator
 

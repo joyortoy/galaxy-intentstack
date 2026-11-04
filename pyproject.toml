@@ -11,6 +11,7 @@ dependencies = ["pydantic>=2.7,<3"]
 
 [project.optional-dependencies]
 dev = ["pytest>=8,<10", "ruff>=0.9,<1"]
+ecosystem = ["fastapi>=0.115,<1", "httpx>=0.27,<1", "uvicorn>=0.30,<1"]
 
 [project.scripts]
 galaxy-demo = "galaxy_intentstack.api:main"
