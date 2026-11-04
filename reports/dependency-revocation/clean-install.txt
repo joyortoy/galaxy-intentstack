@@ -1,0 +1,120 @@
+Collecting annotated-doc==0.0.5 (from -r /home/sam/galaxy-intentstack-revocation-20261105/requirements-phase2.lock (line 1))
+  Using cached annotated_doc-0.0.5-py3-none-any.whl.metadata (6.5 kB)
+Collecting annotated-types==0.8.0 (from -r /home/sam/galaxy-intentstack-revocation-20261105/requirements-phase2.lock (line 2))
+  Using cached annotated_types-0.8.0-py3-none-any.whl.metadata (15 kB)
+Collecting anyio==4.16.0 (from -r /home/sam/galaxy-intentstack-revocation-20261105/requirements-phase2.lock (line 3))
+  Using cached anyio-4.16.0-py3-none-any.whl.metadata (4.7 kB)
+Collecting certifi==2026.10.23 (from -r /home/sam/galaxy-intentstack-revocation-20261105/requirements-phase2.lock (line 4))
+  Using cached certifi-2026.10.23-py3-none-any.whl.metadata (2.5 kB)
+Collecting click==8.5.0 (from -r /home/sam/galaxy-intentstack-revocation-20261105/requirements-phase2.lock (line 5))
+  Using cached click-8.5.0-py3-none-any.whl.metadata (2.6 kB)
+Collecting fastapi==0.162.0 (from -r /home/sam/galaxy-intentstack-revocation-20261105/requirements-phase2.lock (line 6))
+  Using cached fastapi-0.162.0-py3-none-any.whl.metadata (26 kB)
+Collecting h11==0.16.0 (from -r /home/sam/galaxy-intentstack-revocation-20261105/requirements-phase2.lock (line 7))
+  Using cached h11-0.16.0-py3-none-any.whl.metadata (8.3 kB)
+Collecting httpcore==1.0.9 (from -r /home/sam/galaxy-intentstack-revocation-20261105/requirements-phase2.lock (line 8))
+  Using cached httpcore-1.0.9-py3-none-any.whl.metadata (21 kB)
+Collecting httpx==0.28.1 (from -r /home/sam/galaxy-intentstack-revocation-20261105/requirements-phase2.lock (line 9))
+  Using cached httpx-0.28.1-py3-none-any.whl.metadata (7.1 kB)
+Collecting idna==3.20 (from -r /home/sam/galaxy-intentstack-revocation-20261105/requirements-phase2.lock (line 10))
+  Using cached idna-3.20-py3-none-any.whl.metadata (7.2 kB)
+Collecting iniconfig==2.3.1 (from -r /home/sam/galaxy-intentstack-revocation-20261105/requirements-phase2.lock (line 11))
+  Using cached iniconfig-2.3.1-py3-none-any.whl.metadata (2.8 kB)
+Collecting opentelemetry-api==1.45.2 (from -r /home/sam/galaxy-intentstack-revocation-20261105/requirements-phase2.lock (line 12))
+  Using cached opentelemetry_api-1.45.2-py3-none-any.whl.metadata (1.4 kB)
+Collecting packaging==26.3 (from -r /home/sam/galaxy-intentstack-revocation-20261105/requirements-phase2.lock (line 13))
+  Using cached packaging-26.3-py3-none-any.whl.metadata (3.5 kB)
+Collecting pluggy==1.7.0 (from -r /home/sam/galaxy-intentstack-revocation-20261105/requirements-phase2.lock (line 14))
+  Using cached pluggy-1.7.0-py3-none-any.whl.metadata (5.0 kB)
+Collecting pydantic==2.14.2 (from -r /home/sam/galaxy-intentstack-revocation-20261105/requirements-phase2.lock (line 15))
+  Using cached pydantic-2.14.2-py3-none-any.whl.metadata (137 kB)
+Collecting pydantic_core==2.50.2 (from -r /home/sam/galaxy-intentstack-revocation-20261105/requirements-phase2.lock (line 16))
+  Using cached pydantic_core-2.50.2-cp313-cp313-manylinux2014_x86_64.manylinux_2_17_x86_64.whl.metadata (6.5 kB)
+Collecting Pygments==2.21.0 (from -r /home/sam/galaxy-intentstack-revocation-20261105/requirements-phase2.lock (line 17))
+  Using cached pygments-2.21.0-py3-none-any.whl.metadata (2.5 kB)
+Collecting pytest==9.2.0 (from -r /home/sam/galaxy-intentstack-revocation-20261105/requirements-phase2.lock (line 18))
+  Using cached pytest-9.2.0-py3-none-any.whl.metadata (7.9 kB)
+Collecting ruff==0.17.3 (from -r /home/sam/galaxy-intentstack-revocation-20261105/requirements-phase2.lock (line 19))
+  Using cached ruff-0.17.3-py3-none-manylinux_2_17_x86_64.manylinux2014_x86_64.whl.metadata (20 kB)
+Collecting starlette==1.10.0 (from -r /home/sam/galaxy-intentstack-revocation-20261105/requirements-phase2.lock (line 20))
+  Using cached starlette-1.10.0-py3-none-any.whl.metadata (6.6 kB)
+Collecting typing_extensions==4.16.0 (from -r /home/sam/galaxy-intentstack-revocation-20261105/requirements-phase2.lock (line 21))
+  Using cached typing_extensions-4.16.0-py3-none-any.whl.metadata (3.3 kB)
+Collecting typing-inspection==0.4.5 (from -r /home/sam/galaxy-intentstack-revocation-20261105/requirements-phase2.lock (line 22))
+  Using cached typing_inspection-0.4.5-py3-none-any.whl.metadata (2.6 kB)
+Collecting uvicorn==0.54.0 (from -r /home/sam/galaxy-intentstack-revocation-20261105/requirements-phase2.lock (line 23))
+  Using cached uvicorn-0.54.0-py3-none-any.whl.metadata (6.6 kB)
+Using cached annotated_doc-0.0.5-py3-none-any.whl (5.3 kB)
+Using cached annotated_types-0.8.0-py3-none-any.whl (13 kB)
+Using cached anyio-4.16.0-py3-none-any.whl (134 kB)
+Using cached certifi-2026.10.23-py3-none-any.whl (135 kB)
+Using cached click-8.5.0-py3-none-any.whl (125 kB)
+Using cached fastapi-0.162.0-py3-none-any.whl (148 kB)
+Using cached h11-0.16.0-py3-none-any.whl (37 kB)
+Using cached httpcore-1.0.9-py3-none-any.whl (78 kB)
+Using cached httpx-0.28.1-py3-none-any.whl (73 kB)
+Using cached idna-3.20-py3-none-any.whl (69 kB)
+Using cached iniconfig-2.3.1-py3-none-any.whl (7.6 kB)
+Using cached opentelemetry_api-1.45.2-py3-none-any.whl (60 kB)
+Using cached packaging-26.3-py3-none-any.whl (129 kB)
+Using cached pluggy-1.7.0-py3-none-any.whl (27 kB)
+Using cached pydantic-2.14.2-py3-none-any.whl (490 kB)
+Using cached pydantic_core-2.50.2-cp313-cp313-manylinux2014_x86_64.manylinux_2_17_x86_64.whl (2.2 MB)
+Using cached pygments-2.21.0-py3-none-any.whl (1.3 MB)
+Using cached pytest-9.2.0-py3-none-any.whl (411 kB)
+Using cached ruff-0.17.3-py3-none-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (10.6 MB)
+Using cached starlette-1.10.0-py3-none-any.whl (80 kB)
+Using cached typing_extensions-4.16.0-py3-none-any.whl (45 kB)
+Using cached typing_inspection-0.4.5-py3-none-any.whl (14 kB)
+Using cached uvicorn-0.54.0-py3-none-any.whl (87 kB)
+Installing collected packages: typing_extensions, ruff, Pygments, pluggy, packaging, iniconfig, idna, h11, click, certifi, annotated-types, annotated-doc, uvicorn, typing-inspection, pytest, pydantic_core, opentelemetry-api, httpcore, anyio, starlette, pydantic, httpx, fastapi
+
+Successfully installed Pygments-2.21.0 annotated-doc-0.0.5 annotated-types-0.8.0 anyio-4.16.0 certifi-2026.10.23 click-8.5.0 fastapi-0.162.0 h11-0.16.0 httpcore-1.0.9 httpx-0.28.1 idna-3.20 iniconfig-2.3.1 opentelemetry-api-1.45.2 packaging-26.3 pluggy-1.7.0 pydantic-2.14.2 pydantic_core-2.50.2 pytest-9.2.0 ruff-0.17.3 starlette-1.10.0 typing-inspection-0.4.5 typing_extensions-4.16.0 uvicorn-0.54.0
+Processing /home/sam/intentstack-production/current/JoyEvidence
+  Installing build dependencies: started
+  Installing build dependencies: finished with status 'done'
+  Getting requirements to build wheel: started
+  Getting requirements to build wheel: finished with status 'done'
+  Preparing metadata (pyproject.toml): started
+  Preparing metadata (pyproject.toml): finished with status 'done'
+Processing /home/sam/intentstack-production/current/IntentStack
+  Installing build dependencies: started
+  Installing build dependencies: finished with status 'done'
+  Getting requirements to build wheel: started
+  Getting requirements to build wheel: finished with status 'done'
+  Preparing metadata (pyproject.toml): started
+  Preparing metadata (pyproject.toml): finished with status 'done'
+Processing /home/sam/joyctl
+  Getting requirements to build wheel: started
+  Getting requirements to build wheel: finished with status 'done'
+  Preparing metadata (pyproject.toml): started
+  Preparing metadata (pyproject.toml): finished with status 'done'
+Processing /home/sam/galaxy-intentstack-revocation-20261105
+  Installing build dependencies: started
+  Installing build dependencies: finished with status 'done'
+  Getting requirements to build wheel: started
+  Getting requirements to build wheel: finished with status 'done'
+  Preparing metadata (pyproject.toml): started
+  Preparing metadata (pyproject.toml): finished with status 'done'
+Building wheels for collected packages: joy-evidence, joy-intentstack, joyctl, galaxy-intentstack
+  Building wheel for joy-evidence (pyproject.toml): started
+  Building wheel for joy-evidence (pyproject.toml): finished with status 'done'
+  Created wheel for joy-evidence: filename=joy_evidence-0.1.0-py3-none-any.whl size=14023 sha256=54b392cd6cbddec3c9be800c6c6eb592d6e2cb888068e25814965e590cbe1227
+  Stored in directory: /tmp/pip-ephem-wheel-cache-9zecjhgq/wheels/2b/d3/db/e27b2fb11cacb4a343348baa620fac1ae3d4619b1da5e122bf
+  Building wheel for joy-intentstack (pyproject.toml): started
+  Building wheel for joy-intentstack (pyproject.toml): finished with status 'done'
+  Created wheel for joy-intentstack: filename=joy_intentstack-0.1.0-py3-none-any.whl size=20677 sha256=3e46f99c4ee8fcf0e9e23c02ce01065202ad5180867619ae2c48bbbfab7cc4a8
+  Stored in directory: /tmp/pip-ephem-wheel-cache-9zecjhgq/wheels/84/12/5c/025d0d6fc8939fe69b9dfd23512a0fe429ffc55d9fefbcbe56
+  Building wheel for joyctl (pyproject.toml): started
+  Building wheel for joyctl (pyproject.toml): finished with status 'done'
+  Created wheel for joyctl: filename=joyctl-0.26.0-py3-none-any.whl size=62653994 sha256=9a937f8e1586b50c8642989b49dcae9fa7b95f410c3ff9ca40598fdf5796304e
+  Stored in directory: /tmp/pip-ephem-wheel-cache-9zecjhgq/wheels/6a/9a/de/a362b783f4925abc7363188b60df8fafa42f32ab5cf5d7952a
+  Building wheel for galaxy-intentstack (pyproject.toml): started
+  Building wheel for galaxy-intentstack (pyproject.toml): finished with status 'done'
+  Created wheel for galaxy-intentstack: filename=galaxy_intentstack-0.1.0-py3-none-any.whl size=33038 sha256=1760c972dfef5de7847dff11fcb360570a90c8218d114f79a2ffdc4e4c5fbfd0
+  Stored in directory: /home/sam/.cache/pip/wheels/34/8e/02/f8be255e899419d819cd87e0b2480e6d350f25d2ce2a069761
+Successfully built joy-evidence joy-intentstack joyctl galaxy-intentstack
+Installing collected packages: joyctl, joy-intentstack, joy-evidence, galaxy-intentstack
+
+Successfully installed galaxy-intentstack-0.1.0 joy-evidence-0.1.0 joy-intentstack-0.1.0 joyctl-0.26.0
+Installed isolated packages; no production services or configurations were changed.

@@ -6,6 +6,14 @@ dependency-aware belief revision and deterministic authorization. No model API i
 **Milestone:** local vertical slice, not production certified. The language detector is a small
 rule set; it is not a general truth oracle or a psychological assessment tool.
 
+## Dependency-revocation follow-up
+
+The isolated controller now checks committed belief dependencies at native grant-validation
+boundaries and durably forwards invalidation to JoyCtl's existing revocation API. Pending
+forwarding does not permit a worker lease. See [design and reproduction](docs/dependency-revocation.md)
+and [qualification](reports/dependency-revocation/qualification.md).
+Production bootstrap, distributed cancellation, identity and physical-attestation gaps remain.
+
 ## Compiled-plan follow-up
 
 The follow-up replaces raw instruction queueing with pinned compiled prompts linked to the

@@ -17,7 +17,9 @@ The local read-only integration is qualified under its tested conditions. The fo
    qualify loss, replay, corruption and acknowledgment before claiming remote delivery.
 4. Consequential external effects. No transfers, calendar changes, privileged tools or production
    mission completion are enabled. Existing JoyCtl owns authorization consumption and worker
-   dispatch. Prove post-queue belief invalidation/native revocation propagation, cancellation,
+   dispatch. The local composed post-queue dependency veto and native revocation forwarding
+   are now qualified (docs/dependency-revocation.md). Production must enforce that bootstrap
+   before worker ingress and qualify distributed revocation/cancellation,
    callback-free effect reconciliation and remaining cross-service races before adding effects.
 5. Broad manipulation classification. The held-out fixtures are small and template-heavy.
    The extra challenge initially failed badly and was used for feedback; the post-feedback result

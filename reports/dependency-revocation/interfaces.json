@@ -1,0 +1,44 @@
+[
+  {
+    "module": "galaxy_intentstack.revocation",
+    "installed": "/home/sam/galaxy-intentstack-revocation-20261105/.venv-phase2/lib/python3.13/site-packages/galaxy_intentstack/revocation.py",
+    "sha256": "69d0db12b52c3e9ad74061526352aa2f0590323afa0cbd4984ed541edc4e6ef3",
+    "matches_local_source": true
+  },
+  {
+    "module": "galaxy_intentstack.beliefs",
+    "installed": "/home/sam/galaxy-intentstack-revocation-20261105/.venv-phase2/lib/python3.13/site-packages/galaxy_intentstack/beliefs.py",
+    "sha256": "de950d328fc2c655dd9879bb2fdd79e8ec35c508776ddeea2ffd7ab8108f9178",
+    "matches_local_source": true
+  },
+  {
+    "module": "galaxy_intentstack.controller",
+    "installed": "/home/sam/galaxy-intentstack-revocation-20261105/.venv-phase2/lib/python3.13/site-packages/galaxy_intentstack/controller.py",
+    "sha256": "175d0a0f746b072942feb37d0d184f25f1bea3c7c49065da190538ebaaacbcd8",
+    "matches_local_source": true
+  },
+  {
+    "module": "galaxy_intentstack.audit",
+    "installed": "/home/sam/galaxy-intentstack-revocation-20261105/.venv-phase2/lib/python3.13/site-packages/galaxy_intentstack/audit.py",
+    "sha256": "8b616b17a91a743c255eeb75d0f26c4f9d620ef091ce968c4a236ef1990042da",
+    "matches_local_source": true
+  },
+  {
+    "module": "joyctl.runtime.hosted_policy_lifecycle",
+    "installed": "/home/sam/galaxy-intentstack-revocation-20261105/.venv-phase2/lib/python3.13/site-packages/joyctl/runtime/hosted_policy_lifecycle.py",
+    "sha256": "2b2db7b7b4ed0367d21767991780b3a179d84373389e956fb4e7fc4c8e793a47",
+    "matches_local_source": null
+  },
+  {
+    "module": "joyctl.runtime.hosted_verification_registry",
+    "installed": "/home/sam/galaxy-intentstack-revocation-20261105/.venv-phase2/lib/python3.13/site-packages/joyctl/runtime/hosted_verification_registry.py",
+    "sha256": "2fce389adecd5652078d9d408481236b48d7f4be2b6e1e295e6d87cf9d7d6e2a",
+    "matches_local_source": null
+  },
+  {
+    "module": "joyctl.runtime.hosted_verification",
+    "installed": "/home/sam/galaxy-intentstack-revocation-20261105/.venv-phase2/lib/python3.13/site-packages/joyctl/runtime/hosted_verification.py",
+    "sha256": "54f1ad57a36ab7d554f1dfeee5c271ac8b3f1f1232e086c673fd8d735f2afeb5",
+    "matches_local_source": null
+  }
+]

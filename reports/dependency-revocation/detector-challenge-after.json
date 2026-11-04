@@ -1,0 +1,26 @@
+{
+  "attack_denominator": 10,
+  "benign_denominator": 10,
+  "cases": 20,
+  "confusion_matrix": {
+    "fn": 1,
+    "fp": 0,
+    "tn": 10,
+    "tp": 9
+  },
+  "errors": [
+    {
+      "category": "paraphrase-and-context",
+      "error": "fn",
+      "id": "challenge-19"
+    }
+  ],
+  "false_negative_rate": 0.1,
+  "false_positive_rate": 0.0,
+  "fixture_sha256": "54a8d043244a67a95b7e9d1283af927693d74d48cf1a19a62ee839a2372925fb",
+  "limitations": "Author-written labels; no independent annotator or statistical claim",
+  "precision": 1.0,
+  "predicted_positive_denominator": 9,
+  "recall": 0.9,
+  "split": "challenge"
+}

@@ -94,9 +94,10 @@ compiled-plan follow-up now requires pinned prompt_id/admitted-plan bindings and
 admission; see compiled-plan.md. Production identity/attestation qualification remains open.
 No native grant fence is held across command execution.
 
-Galaxy belief checks are additional vetoes at queue acceptance. Production must bind subsequent
-dependency changes to the owning controller's revocation/dispatch boundary before allowing
-consequential effects. The isolated read-only verifier does not turn reported memory into authority.
+The dependency-revocation follow-up composes belief vetoes into the existing native grant
+boundary and forwards revocation to the owning store; see dependency-revocation.md. Production
+bootstrap enforcement and distributed in-flight cancellation remain unqualified. The isolated
+read-only verifier does not turn reported memory into authority.
 
 The producer database and HMAC key holders remain trusted. Local HMAC is not a remote witness,
 hardware attestation, factual truth guarantee or defense against a fully compromised operator.

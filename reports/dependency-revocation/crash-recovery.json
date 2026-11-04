@@ -1,0 +1,41 @@
+{
+  "method": "fresh spawned interpreters terminated with os._exit",
+  "tests": [
+    {
+      "test": "test_hard_exit_recovers_dependency_revocation_without_reexecution[dependency-invalidation-96]",
+      "passed": true,
+      "seconds": 2.337
+    },
+    {
+      "test": "test_hard_exit_recovers_dependency_revocation_without_reexecution[native-dependency-revoke-97]",
+      "passed": true,
+      "seconds": 1.83
+    },
+    {
+      "test": "test_kill_after_sandbox_execution_before_authenticated_audit",
+      "passed": true,
+      "seconds": 3.138
+    },
+    {
+      "test": "test_process_kill_after_preparation_requires_current_authority",
+      "passed": true,
+      "seconds": 1.708
+    },
+    {
+      "test": "test_process_kill_after_controller_commit_creates_only_one_job",
+      "passed": true,
+      "seconds": 1.935
+    },
+    {
+      "test": "test_process_kill_after_ledger_commit_does_not_duplicate_delivery",
+      "passed": true,
+      "seconds": 1.736
+    },
+    {
+      "test": "test_process_kill_during_local_write_rolls_back_evidence_and_outbox",
+      "passed": true,
+      "seconds": 1.682
+    }
+  ],
+  "all_passed": true
+}

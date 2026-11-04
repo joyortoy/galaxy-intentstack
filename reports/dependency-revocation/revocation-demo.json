@@ -1,0 +1,57 @@
+{
+  "audit_key_path": "/home/sam/galaxy-intentstack-revocation-20261105/work/phase2-qualification-296ad489cd564214801a0f3a15c7918f/test_real_retrieval_revision_r0/sink.key",
+  "audit_ledger_path": "/home/sam/galaxy-intentstack-revocation-20261105/work/phase2-qualification-296ad489cd564214801a0f3a15c7918f/test_real_retrieval_revision_r0/sink.db",
+  "audit_verification": {
+    "head_mac": "9496c6dae92da773cd45514ea6c797b4922e4c86514a2ff11dcff17ad046dac6",
+    "records": 19,
+    "status": "verified"
+  },
+  "controller_accepted_job": "job_20c2a437c03d45b1a650b05d138f8554",
+  "graph": [
+    {
+      "claim_id": "b17e624b-730f-4bdb-a374-af37e7cb908d",
+      "created": 1793818844.1938078,
+      "id": "4996ab8a-d9ef-4977-a51f-6b813f7ffee2",
+      "revision": 3,
+      "session": "integration-session",
+      "source": "local-inference",
+      "status": "stale",
+      "subject": "derived",
+      "value": "de2c6f5e204b956111c4cbc0281789950828abcd8fdd754f1e94bb3e7ed8348e"
+    },
+    {
+      "claim_id": "880e715d-3b0a-4123-9d11-4a518c3ddbcf",
+      "created": 1793818844.1829576,
+      "id": "8a6620b6-863b-490b-bd7d-b132857ed962",
+      "revision": 3,
+      "session": "integration-session",
+      "source": "isolated-intentstack:source-author",
+      "status": "superseded",
+      "subject": "meeting.day",
+      "value": "monday"
+    },
+    {
+      "claim_id": "d415af33-bddc-4920-bc1f-638fa118cb42",
+      "created": 1793818844.6451123,
+      "id": "8257cd5d-13a5-4765-b207-43cd12b61c17",
+      "revision": 1,
+      "session": "integration-session",
+      "source": "isolated-intentstack:source-author",
+      "status": "active",
+      "subject": "meeting.day",
+      "value": "tuesday"
+    }
+  ],
+  "native_revoked": true,
+  "pending_before_forwarding": 1,
+  "production_qualified": false,
+  "revocation": {
+    "authority": "existing JoyCtl native grant store",
+    "errors": [],
+    "native_acknowledged": 1,
+    "pending": 0,
+    "requested": 1
+  },
+  "scope": "composed isolated owner, real retrieval revision and native grant revocation",
+  "worker_attempts": 0
+}
