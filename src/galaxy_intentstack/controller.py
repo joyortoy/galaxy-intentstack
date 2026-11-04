@@ -28,6 +28,10 @@ class Plan(Model):
     authorization_id: str = Field(min_length=1, max_length=200)
     verification_id: str = Field(min_length=1, max_length=200)
     workspace_ref: str = Field(min_length=1, max_length=200)
+    prompt_id: str | None = Field(default=None, min_length=1, max_length=200)
+    expected_prompt_hash: str | None = Field(default=None, pattern=r"^[a-f0-9]{64}$")
+    admitted_plan_id: str | None = Field(default=None, min_length=1, max_length=200)
+    admitted_decision_id: str | None = Field(default=None, min_length=1, max_length=200)
     required_belief_ids: tuple[str, ...] = Field(default=(), max_length=32)
     require_physical_attestation: bool = True
 
@@ -35,10 +39,9 @@ class Plan(Model):
 class JoyCtlController:
     """Operator configures a registered read-only plan. Never build Plan from retrieved text."""
 
-    INSTRUCTION = "Inspect the controller-registered read-only snapshot and retain evidence."
-
     def __init__(self, plane, plan: Plan):
         self.plane, self.plan = plane, plan
+        self._prompt_reader = None
 
     def context(self, human_token, device_token):
         try:
@@ -76,6 +79,38 @@ class JoyCtlController:
         if action.belief_ids != p.required_belief_ids:
             raise IntegrationDenied("Required belief conditions differ from the operator plan")
         try:
+            if not all(
+                (p.prompt_id, p.expected_prompt_hash, p.admitted_plan_id, p.admitted_decision_id)
+            ):
+                raise IntegrationDenied("A pinned compiled prompt and admitted plan are required")
+            if self._prompt_reader is None:
+                from joyctl.prompt_compiler.store import CompiledPromptStore
+
+                self._prompt_reader = CompiledPromptStore(
+                    self.plane.runtime_database, require_tenant=True
+                )
+            prompt = self._prompt_reader.require_for_execution(
+                p.prompt_id,
+                mission_id=p.mission_id,
+                expected_hash=p.expected_prompt_hash,
+                organisation_id=p.organisation_id,
+            )
+            intake = self.plane.mission_control.intake.load_result(p.mission_id)
+            if (
+                intake is None
+                or intake.plan.id != p.admitted_plan_id
+                or intake.decision.id != p.admitted_decision_id
+                or prompt.plan_id != p.admitted_plan_id
+                or prompt.decision_id != p.admitted_decision_id
+                or prompt.step_id != p.step_id
+                or p.step_id not in {step.step_id for step in intake.plan.steps}
+                or prompt.validation_status != "passed"
+                or prompt.profile != "read_only_analysis"
+                or prompt.target_harness != "hosted"
+            ):
+                raise IntegrationDenied(
+                    "Compiled prompt is not bound to the current admitted read-only plan"
+                )
             row = self.plane._snapshot_authorization_row(p.organisation_id, p.verification_id)
             if row is None or row["revoked"]:
                 raise IntegrationDenied("Registered plan absent or revoked")
@@ -142,7 +177,8 @@ class JoyCtlController:
                 mission_id=p.mission_id,
                 step_id=p.step_id,
                 authorization_id=p.authorization_id,
-                instruction=self.INSTRUCTION,
+                prompt_id=p.prompt_id,
+                expected_prompt_hash=p.expected_prompt_hash,
                 idempotency_key=key,
             )
         except (AuthorizationError, ConflictError, ValidationError) as exc:

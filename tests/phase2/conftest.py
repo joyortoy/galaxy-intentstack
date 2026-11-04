@@ -22,6 +22,7 @@ from intentstack.auth import Principal, TokenRegistry
 from intentstack.data_agent import DataAgent
 from joyctl.hosted import AgentSession, HostedConfig, HostedControlPlane
 from joyctl.joylang import SourceMessage, compile_joylang
+from joyctl.joylang_kernel import JoyLangKernel
 from joyctl.policy import (
     NetworkPolicy,
     PolicyConfig,
@@ -29,6 +30,7 @@ from joyctl.policy import (
     propose_action,
     scope_strategy,
 )
+from joyctl.runtime.intake.service import MissionIntakeRequest
 from joyctl.verification_receipts import source_fingerprint
 from joyevidence import Ledger
 
@@ -100,7 +102,7 @@ def retrieval_service(tmp_path):
 
 
 @pytest.fixture
-def integrated(tmp_path):
+def integrated(tmp_path, request):
     config = HostedConfig(secret_key=secrets.token_urlsafe(48))
     plane = HostedControlPlane.sqlite(tmp_path / "controller.db", config=config)
     user = plane.create_user("isolated@example.invalid", "Isolated test owner")
@@ -135,6 +137,31 @@ def integrated(tmp_path):
         project_id=project["id"],
         title="Inspect isolated evidence",
     )
+    intake = plane.mission_control.intake.accept(
+        MissionIntakeRequest(
+            mission_id=mission["id"],
+            objective=mission["title"],
+            available_capabilities=frozenset({"read_repository", "run_tests"}),
+            idempotency_key="isolated-intake:" + mission["id"],
+            origin="galaxy_compiled_plan_qualification",
+            compatibility=False,
+            approvals_satisfied=True,
+            dispatch_compiled_only=True,
+            metadata={"organisation_id": org["id"], "project_id": project["id"]},
+        )
+    )
+    assert len(intake.plan.steps) == 1
+    step_id = intake.plan.steps[0].step_id
+    prompt = plane.prompt_compiler.compile(
+        mission_id=mission["id"],
+        decision_id=intake.decision.id,
+        plan_id=intake.plan.id,
+        step_id=step_id,
+        joylang_program="@objective\nInspect the controller-registered read-only snapshot and retain evidence.\n@constraints\nDo not change files. Do not use network access.\n@verification\nRetain the independent native verification receipt.\n",
+        target_harness="hosted",
+        profile="read_only_analysis",
+        organisation_id=org["id"],
+    )
     root = tmp_path / "source"
     root.mkdir()
     subprocess.run(["git", "init", "-q", str(root)], check=True)
@@ -163,6 +190,21 @@ resource_budgets: max_runtime_seconds=30; max_files_changed=0
         )
     )
     commands = ("/usr/bin/python3 verify.py",)
+    kernel = JoyLangKernel()
+    if not kernel.available():
+        raise RuntimeError("BLOCKED: existing built JoyLang kernel is required; no fallback")
+    contract = tmp_path / "readonly-contract.joy"
+    contract.write_text(
+        "joy 0.2\nid: galaxy-readonly-review\n\nintent\n"
+        "  outcome: Verify the isolated snapshot and retain it for review\n\nproof\n"
+        "  test: /usr/bin/python3 verify.py\n"
+        "  human: independent_review_completed\n"
+    )
+    admitted = kernel.admit_file(contract)
+    assert admitted["ok"] is True
+    admitted_spec = admitted["spec"]
+    test_obligation = next(p for p in admitted_spec["proof"] if p["class"] == "test")
+
     proposal = propose_action(
         compiled_intent=compiled,
         objective_id=mission["id"],
@@ -195,7 +237,7 @@ resource_budgets: max_runtime_seconds=30; max_files_changed=0
     worker = plane.record_execution_authorization(
         principal,
         mission_id=mission["id"],
-        step_id="inspect",
+        step_id=step_id,
         grant={
             **asdict(native),
             "capabilities": ["read_repository", "run_tests"],
@@ -209,6 +251,10 @@ resource_budgets: max_runtime_seconds=30; max_files_changed=0
         source_sha256=source_fingerprint(str(root)),
         commands=commands,
         grant=native,
+        admitted_spec=admitted_spec if getattr(request, "param", True) else None,
+        test_obligation_commands={test_obligation["id"]: commands[0]}
+        if getattr(request, "param", True)
+        else {},
         current_intent_revision=compiled.revision,
         current_policy_revision=native.policy_revision,
         timeout_seconds=30,
@@ -218,10 +264,14 @@ resource_budgets: max_runtime_seconds=30; max_files_changed=0
         user_id=user["id"],
         device_id=paired["device_id"],
         mission_id=mission["id"],
-        step_id="inspect",
+        step_id=step_id,
         authorization_id=worker["authorization_id"],
         verification_id=registered["verification_authorization_id"],
         workspace_ref="isolated-snapshot",
+        prompt_id=prompt.prompt_id,
+        expected_prompt_hash=prompt.prompt_hash,
+        admitted_plan_id=intake.plan.id,
+        admitted_decision_id=intake.decision.id,
         require_physical_attestation=False,
     )
     engine = Engine(tmp_path / "galaxy.db")
@@ -232,6 +282,8 @@ resource_budgets: max_runtime_seconds=30; max_files_changed=0
     controller = JoyCtlController(plane, plan)
     integration = Integration(engine, controller, delivery)
     return TestEnvironment(
+        prompt=prompt,
+        intake=intake,
         plane=plane,
         config=config,
         principal=principal,

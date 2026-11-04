@@ -27,7 +27,10 @@ def main():
     import intentstack  # noqa: F401 -- required, never silently skip integration dependencies
     import joyctl  # noqa: F401
     import joyevidence  # noqa: F401
+    from joyctl.joylang_kernel import JoyLangKernel
 
+    if not shutil.which("node") or not JoyLangKernel().available():
+        p.error("BLOCKED: an existing built JoyLang kernel and Node are required; no fallback")
     root = Path(__file__).resolve().parents[1]
     os.chdir(root)
     output = Path(args.output).resolve()
