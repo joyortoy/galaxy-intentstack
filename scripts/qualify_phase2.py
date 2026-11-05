@@ -6,12 +6,17 @@ import os
 import shutil
 import subprocess
 import sys
+import tempfile
+import time
 import uuid
 from pathlib import Path
 
 
 def run(args, path, *, env=None):
+    print(f"Running {path.name}...", flush=True)
+    started = time.perf_counter()
     result = subprocess.run(args, check=False, capture_output=True, text=True, env=env)
+    print(f"{path.name}: {time.perf_counter() - started:.2f}s", flush=True)
     path.write_text(result.stdout + result.stderr)
     if result.returncode:
         raise SystemExit(f"FAILED: {path}; exit={result.returncode}")
@@ -20,7 +25,13 @@ def run(args, path, *, env=None):
 
 def main():
     p = argparse.ArgumentParser()
-    p.add_argument("--output", default="reports/phase2")
+    p.add_argument("--output", help="Evidence directory (defaults depend on mode)")
+    p.add_argument(
+        "--quick",
+        action="store_true",
+        help="Run the full test suite in temporary storage for routine feedback; "
+        "does not qualify durable disk persistence",
+    )
     args = p.parse_args()
     if sys.platform != "linux" or not shutil.which("joymux") or not shutil.which("bwrap"):
         p.error("BLOCKED: real isolated Unix JoyMux placement and Linux bwrap are required")
@@ -33,10 +44,23 @@ def main():
         p.error("BLOCKED: an existing built JoyLang kernel and Node are required; no fallback")
     root = Path(__file__).resolve().parents[1]
     os.chdir(root)
-    output = Path(args.output).resolve()
+    output = Path(
+        args.output or ("reports/quick-check" if args.quick else "reports/phase2")
+    ).resolve()
     output.mkdir(parents=True, exist_ok=True)
-    probe = root / "work" / ("phase2-qualification-" + uuid.uuid4().hex)
-    probe.parent.mkdir(parents=True, exist_ok=True, mode=0o700)
+    started = time.perf_counter()
+    if args.quick:
+        # Keep fixtures available for independent audit verification and inspection.
+        # mkdtemp creates a private directory; no existing user path is cleared.
+        probe = Path(tempfile.mkdtemp(prefix="galaxy-quick-")) / "tests"
+        print(
+            "QUICK CHECK: temporary storage; durable disk qualification NOT ESTABLISHED.",
+            flush=True,
+        )
+    else:
+        probe = root / "work" / ("phase2-qualification-" + uuid.uuid4().hex)
+        probe.parent.mkdir(parents=True, exist_ok=True, mode=0o700)
+        print("FULL QUALIFICATION: persistent checkout storage.", flush=True)
     env = dict(os.environ)
     env["GALAXY_PHASE2_DEMO_REPORT"] = str(output / "integration-demo.json")
     env["GALAXY_REVOCATION_DEMO_REPORT"] = str(output / "revocation-demo.json")
@@ -49,6 +73,7 @@ def main():
             "-q",
             "-o",
             "pythonpath=",
+            "--durations=10",
             "--basetemp",
             str(probe),
             "--junitxml",
@@ -151,7 +176,16 @@ def main():
     )
     if json.loads(checked).get("status") != "verified":
         raise SystemExit("FAILED: startup audit did not independently verify")
-    print("Qualification evidence saved: " + str(output))
+    summary = {
+        "mode": "quick" if args.quick else "full",
+        "elapsed_seconds": round(time.perf_counter() - started, 2),
+        "fixture_path": str(probe),
+        "durable_disk_qualification_run": not args.quick,
+        "production_qualified": False,
+    }
+    (output / "run-summary.json").write_text(json.dumps(summary, indent=2) + "\n")
+    print(("Quick-check" if args.quick else "Qualification") + " evidence saved: " + str(output))
+    print(f"Total: {summary['elapsed_seconds']:.2f}s", flush=True)
     print("Physical attestation and production qualification remain NOT ESTABLISHED.")
 
 

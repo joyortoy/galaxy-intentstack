@@ -1,0 +1,37 @@
+{
+  "audit_key_path": "/tmp/galaxy-quick-hfesk3wm/tests/test_real_native_execution_req0/sink.key",
+  "audit_ledger_path": "/tmp/galaxy-quick-hfesk3wm/tests/test_real_native_execution_req0/sink.db",
+  "audit_verification": {
+    "head_mac": "f58d9bf6754cd419783c1fb73df093bf2a3a57eb1fe244cb03a43996f9e62206",
+    "records": 4,
+    "status": "verified"
+  },
+  "native_passed": true,
+  "observation": {
+    "audit": {
+      "local_persisted": 4,
+      "pending": 0,
+      "remote_acknowledged": false,
+      "sink": "existing_local_joyevidence_hmac_ledger",
+      "sink_acknowledged": 4
+    },
+    "execution_id": "execution_cbc22083e7674a229d07581dffbd779f",
+    "job_id": "job_c1fa4dc27d3e47dcaf190c1de1ba2565",
+    "job_state": "failed",
+    "operation_id": "operation-1",
+    "physical_attestation": "NOT_ESTABLISHED",
+    "receipt_commitment": "c38e1d20c1ef4742dff2ac4c07670a53b37b8c97c0c2239040634e2217adbfd8",
+    "sandbox_execution_observed": true,
+    "sandbox_passed": true,
+    "semantic_acceptance": false
+  },
+  "physical_attestation": "NOT_ESTABLISHED",
+  "production_qualified": false,
+  "startup": {
+    "active_calls": 0,
+    "failure_type": null,
+    "production_qualified": false,
+    "ready": true,
+    "state": "READY"
+  }
+}

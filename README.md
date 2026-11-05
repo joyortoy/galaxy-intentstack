@@ -11,7 +11,10 @@ rule set; it is not a general truth oracle or a psychological assessment tool.
 The isolated host now starts closed and gates native queueing, worker claims and verification
 recovery on healthy dependency and authenticated audit composition. Health failures latch closed;
 healthy draining retains custody facts for fresh-host recovery. See [design and reproduction](docs/startup-guard.md)
-and [qualification](reports/startup-guard/qualification.md). Production startup/deployment,
+and [qualification](reports/startup-guard/qualification.md). For faster routine feedback on joy,
+use `.venv-phase2/bin/python scripts/qualify_phase2.py --quick`; this runs all tests using temporary
+storage and saves separate reports/quick-check evidence. Keep the default full run for persistent
+storage qualification. Production startup/deployment,
 identity and physical attestation remain unqualified.
 
 ## Dependency-revocation follow-up

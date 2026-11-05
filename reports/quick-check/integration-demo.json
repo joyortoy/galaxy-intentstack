@@ -1,0 +1,122 @@
+{
+  "audit_key_path": "/tmp/galaxy-quick-hfesk3wm/tests/test_real_retrieval_authorizat0/sink.key",
+  "audit_ledger_path": "/tmp/galaxy-quick-hfesk3wm/tests/test_real_retrieval_authorizat0/sink.db",
+  "audit_verification": {
+    "head_mac": "a61b844cdb2572d6e292c0e30579161f29cc97bdeff6a87749124fc54f21b78c",
+    "records": 8,
+    "status": "verified"
+  },
+  "dispatch": {
+    "audit": {
+      "local_persisted": 7,
+      "pending": 0,
+      "remote_acknowledged": false,
+      "sink": "existing_local_joyevidence_hmac_ledger",
+      "sink_acknowledged": 7
+    },
+    "authority": "JoyCtl",
+    "controller_accepted": true,
+    "decision": "ALLOW",
+    "executed": false,
+    "job_id": "job_6cd1c40a80d14740aae786bfb80f960d",
+    "job_state": "queued",
+    "physical_attestation": "NOT_ESTABLISHED"
+  },
+  "joymux_transport": "isolated real Unix socket",
+  "native_receipt": {
+    "aggregate_input_set_sha256": "2900b20ac247d9347e5305c34d35c085c4e93768cf7d55776bf119c8725db6b9",
+    "binding": {
+      "attempt_id": "attempt_execution_086982f57d6645d39f1c63e90797185c_1",
+      "domain": "conventional_snapshot_verification",
+      "execution_id": "execution_086982f57d6645d39f1c63e90797185c",
+      "mission_id": "mission_6762abbaea194a94a9665c6fd002a20c",
+      "producer": "joyctl-hosted-verifier",
+      "scope": "isolated-snapshot:54a23d848e186e51f7ad488765d57effe16651e4af8fdef8a7f282b31ae0bcb4",
+      "version": "hosted-snapshot-verifier/v1"
+    },
+    "claims": [
+      {
+        "claim_sha256": "3f5fe93355feb06710b0ebb56fec5331bdedb364c03609fd30efadc5cc041379",
+        "envelope_sha256": "55b4fcf0caf99de936b92e7b4af7a73f5d4f2a8d9cea984b2008aecd0f6dd748",
+        "reference": "artifact_55b4fcf0caf99de936b92e7b4af7a73f5d4f2a8d9cea984b2008aecd0f6dd748"
+      },
+      {
+        "claim_sha256": "0d19c9dd1e3fa08d874024532c2c37e36b718bc2badc98b3457b2717485b6c8e",
+        "envelope_sha256": "55191c4e70bb8d5b873f8d91790e27396275fd73bfb1855914fdc061eed65b57",
+        "reference": "artifact_55191c4e70bb8d5b873f8d91790e27396275fd73bfb1855914fdc061eed65b57"
+      }
+    ],
+    "commands": [
+      "/usr/bin/python3 verify.py"
+    ],
+    "executable_fingerprints": [
+      [
+        "/usr/bin/python3",
+        "/usr/bin/python3.13",
+        66306,
+        30933474,
+        493,
+        "efb29ce53d36ebaeee80e3aa44fd6c7f9d71bbded5fe1665240b2ed8ecaeee0e"
+      ]
+    ],
+    "grant_id": "grant_83b3cf8651dc47adbb0d10bbc9116a5e",
+    "isolation_profile": "joyctl.local-pair-ipc.v2",
+    "job_id": "job_6cd1c40a80d14740aae786bfb80f960d",
+    "organisation_id": "org_fbdc863e3b4e4c51b12cd4d4ed47dbb3",
+    "passed": true,
+    "physical_attestation": "NOT_ESTABLISHED",
+    "receipts": [
+      {
+        "command": "/usr/bin/python3 verify.py",
+        "cwd": "/tmp/galaxy-quick-hfesk3wm/tests/test_real_retrieval_authorizat0/source",
+        "exit_code": 0,
+        "failure": null,
+        "kernel_socket_isolation": {
+          "filter_sha256": "260eccfff65444ba8c4f6cc8096025d01ce561599b6d0ef7d4e5831321cf5d41",
+          "ipc": "local-stream-and-seqpacket-pairs-only",
+          "library_version": "2.6.0",
+          "native_arch": 3221225534,
+          "profile": "joyctl.local-pair-ipc.v2"
+        },
+        "sandbox": "linux-bwrap-readonly-no-network-v1",
+        "stderr": "",
+        "stderr_log": {
+          "path": "/tmp/galaxy-quick-hfesk3wm/tests/test_real_retrieval_authorizat0/controller.db.evidence/verification-logs/9436f2ffbd6700c5d5918b8af28ee49d99e94b5db9cf918c5a1400a987b4b8e7/stderr-_0gii9yg.log",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "size_bytes": 0
+        },
+        "stdout": "",
+        "stdout_log": {
+          "path": "/tmp/galaxy-quick-hfesk3wm/tests/test_real_retrieval_authorizat0/controller.db.evidence/verification-logs/9436f2ffbd6700c5d5918b8af28ee49d99e94b5db9cf918c5a1400a987b4b8e7/stdout-9orfpzp0.log",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "size_bytes": 0
+        }
+      }
+    ],
+    "schema": "joyctl.snapshot-verification-receipt/v1",
+    "semantic_acceptance": false,
+    "source_after": "54a23d848e186e51f7ad488765d57effe16651e4af8fdef8a7f282b31ae0bcb4",
+    "source_before": "54a23d848e186e51f7ad488765d57effe16651e4af8fdef8a7f282b31ae0bcb4",
+    "verification_plan_sha256": "ea8070e004aea0b57cf1b585bb581ec8a77cbf78c45d195770cf7862ff74318e"
+  },
+  "observation": {
+    "audit": {
+      "local_persisted": 8,
+      "pending": 0,
+      "remote_acknowledged": false,
+      "sink": "existing_local_joyevidence_hmac_ledger",
+      "sink_acknowledged": 8
+    },
+    "execution_id": "execution_086982f57d6645d39f1c63e90797185c",
+    "job_id": "job_6cd1c40a80d14740aae786bfb80f960d",
+    "job_state": "failed",
+    "operation_id": "operation-1",
+    "physical_attestation": "NOT_ESTABLISHED",
+    "receipt_commitment": "719889aeb632fe18b945d45c4d0aa3e4cd5e1ad1a9f15cd3218246a85dd6c98f",
+    "sandbox_execution_observed": true,
+    "sandbox_passed": true,
+    "semantic_acceptance": false
+  },
+  "production_integration_qualified": false,
+  "source": "real localhost IntentStack DataAgent"
+}

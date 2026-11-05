@@ -68,6 +68,19 @@ python3 scripts/setup_phase2.py --venv .venv-phase2
 .venv-phase2/bin/python scripts/qualify_phase2.py --output reports/startup-guard
 ```
 
+For routine feedback, run the same suite and audit checks with temporary test storage:
+
+```sh
+.venv-phase2/bin/python scripts/qualify_phase2.py --quick
+```
+
+Quick mode writes reports/quick-check by default and retains private fixtures under the system
+temporary directory for audit inspection. On joy this is memory-backed /tmp. All tests, lint,
+formatting, benchmarks and independent audit checks still run. This mode exercises process-crash
+recovery but does not qualify durable disk persistence or power-loss behavior. Use the full
+command above for persistent-storage qualification. Every stage prints progress and elapsed time;
+run-summary.json records the mode, total time and fixture path.
+
 The runner uses installed noneditable packages and independently invokes the existing
 joy-evidence console verifier for each demonstration. See reports/startup-guard/qualification.md.
 Private keys, test tokens and enrollment markers remain outside delivered outputs.

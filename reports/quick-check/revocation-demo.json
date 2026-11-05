@@ -1,0 +1,57 @@
+{
+  "audit_key_path": "/tmp/galaxy-quick-hfesk3wm/tests/test_real_retrieval_revision_r0/sink.key",
+  "audit_ledger_path": "/tmp/galaxy-quick-hfesk3wm/tests/test_real_retrieval_revision_r0/sink.db",
+  "audit_verification": {
+    "head_mac": "c7d097674d734a604f7b0eec259b4db1d06481f18a8dccc44b406fa66267f958",
+    "records": 19,
+    "status": "verified"
+  },
+  "controller_accepted_job": "job_f86481b2354b429a897033c4d4ea244d",
+  "graph": [
+    {
+      "claim_id": "2b6c82e5-1110-4adc-b4c1-017415a77120",
+      "created": 1793841476.593496,
+      "id": "d2522a47-cb96-447f-86e7-4ee6336728af",
+      "revision": 3,
+      "session": "integration-session",
+      "source": "local-inference",
+      "status": "stale",
+      "subject": "derived",
+      "value": "de2c6f5e204b956111c4cbc0281789950828abcd8fdd754f1e94bb3e7ed8348e"
+    },
+    {
+      "claim_id": "d2f8f4d4-cbf7-4a14-88c9-422bfe55bb3b",
+      "created": 1793841476.5929034,
+      "id": "693724e9-521b-4c20-81fd-a84fb07dd409",
+      "revision": 3,
+      "session": "integration-session",
+      "source": "isolated-intentstack:source-author",
+      "status": "superseded",
+      "subject": "meeting.day",
+      "value": "monday"
+    },
+    {
+      "claim_id": "361a7f38-fa35-4ec6-bf98-d06b705fdff6",
+      "created": 1793841476.6639938,
+      "id": "81e46ef5-31d2-4644-8994-69814999506a",
+      "revision": 1,
+      "session": "integration-session",
+      "source": "isolated-intentstack:source-author",
+      "status": "active",
+      "subject": "meeting.day",
+      "value": "tuesday"
+    }
+  ],
+  "native_revoked": true,
+  "pending_before_forwarding": 1,
+  "production_qualified": false,
+  "revocation": {
+    "authority": "existing JoyCtl native grant store",
+    "errors": [],
+    "native_acknowledged": 1,
+    "pending": 0,
+    "requested": 1
+  },
+  "scope": "composed isolated owner, real retrieval revision and native grant revocation",
+  "worker_attempts": 0
+}

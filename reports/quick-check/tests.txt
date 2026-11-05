@@ -1,0 +1,15 @@
+........................................................................ [ 42%]
+........................................................................ [ 85%]
+.........................                                                [100%]
+============================= slowest 10 durations =============================
+1.02s call     tests/phase2/test_native_sandbox.py::test_kill_after_sandbox_execution_before_authenticated_audit
+0.46s call     tests/phase2/test_native_sandbox.py::test_real_retrieval_authorization_custody_and_native_sandbox
+0.43s call     tests/phase2/test_startup.py::TestGuardedStartup::test_real_native_execution_requires_healthy_bootstrap[integrated0]
+0.30s call     tests/phase2/test_dependency_revocation.py::test_hard_exit_recovers_dependency_revocation_without_reexecution[dependency-invalidation-96]
+0.30s call     tests/phase2/test_dependency_revocation.py::test_hard_exit_recovers_dependency_revocation_without_reexecution[native-dependency-revoke-97]
+0.30s setup    tests/phase2/test_native_sandbox.py::test_real_retrieval_authorization_custody_and_native_sandbox
+0.29s call     tests/phase2/test_startup.py::TestGuardedStartup::test_process_exit_before_activation_stays_closed_on_restart[integrated0]
+0.28s call     tests/phase2/test_process_recovery.py::test_process_kill_after_controller_commit_creates_only_one_job
+0.28s call     tests/phase2/test_startup.py::TestGuardedStartup::test_draining_retains_facts_then_fresh_host_recovers_verification[integrated0]
+0.27s setup    tests/phase2/test_real_boundaries.py::test_confirmed_memory_does_not_become_verified_fact
+169 passed in 16.80s
