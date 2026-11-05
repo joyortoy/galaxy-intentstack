@@ -40,6 +40,7 @@ def main():
     env = dict(os.environ)
     env["GALAXY_PHASE2_DEMO_REPORT"] = str(output / "integration-demo.json")
     env["GALAXY_REVOCATION_DEMO_REPORT"] = str(output / "revocation-demo.json")
+    env["GALAXY_STARTUP_DEMO_REPORT"] = str(output / "startup-demo.json")
     run(
         [
             sys.executable,
@@ -128,6 +129,28 @@ def main():
     )
     if json.loads(revoked_verification).get("status") != "verified":
         raise SystemExit("FAILED: revocation audit did not independently verify")
+    startup = json.loads((output / "startup-demo.json").read_text())
+    if (
+        not startup["startup"]["ready"]
+        or not startup["native_passed"]
+        or startup["production_qualified"]
+        or startup["observation"]["semantic_acceptance"]
+        or startup["physical_attestation"] != "NOT_ESTABLISHED"
+    ):
+        raise SystemExit("FAILED: guarded startup demonstration failed")
+    checked = run(
+        [
+            str(Path(sys.executable).with_name("joy-evidence")),
+            "verify",
+            "--ledger",
+            startup["audit_ledger_path"],
+            "--key",
+            startup["audit_key_path"],
+        ],
+        output / "independent-startup-audit-verification.txt",
+    )
+    if json.loads(checked).get("status") != "verified":
+        raise SystemExit("FAILED: startup audit did not independently verify")
     print("Qualification evidence saved: " + str(output))
     print("Physical attestation and production qualification remain NOT ESTABLISHED.")
 

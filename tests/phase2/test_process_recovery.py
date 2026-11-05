@@ -15,6 +15,11 @@ from .conftest import submit
 
 
 def crash_worker(phase, data):
+    if phase == "startup-before-activation":
+        from galaxy_intentstack.startup import GuardedControlPlane
+
+        GuardedControlPlane.sqlite(data["controller_path"], config=HostedConfig(**data["config"]))
+        os._exit(98)
     engine = Engine(data["galaxy_path"])
     plane = HostedControlPlane.sqlite(
         data["controller_path"], config=HostedConfig(**data["config"])

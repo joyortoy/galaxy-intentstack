@@ -104,7 +104,13 @@ def retrieval_service(tmp_path):
 @pytest.fixture
 def integrated(tmp_path, request):
     config = HostedConfig(secret_key=secrets.token_urlsafe(48))
-    plane = HostedControlPlane.sqlite(tmp_path / "controller.db", config=config)
+    options = request.param if hasattr(request, "param") and isinstance(request.param, dict) else {}
+    plane_type = HostedControlPlane
+    if options.get("guarded_startup"):
+        from galaxy_intentstack.startup import GuardedControlPlane
+
+        plane_type = GuardedControlPlane
+    plane = plane_type.sqlite(tmp_path / "controller.db", config=config)
     user = plane.create_user("isolated@example.invalid", "Isolated test owner")
     org = plane.create_organisation(user["id"], "Isolated Galaxy")
     principal = plane.principal(user["id"], org["id"])

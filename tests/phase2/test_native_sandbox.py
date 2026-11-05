@@ -8,8 +8,9 @@ from datetime import UTC, datetime
 from .conftest import remember, retrieve, submit
 
 
-def complete_with_retained_claims(f, *, expect_receipt=True):
-    lease = f.agent.claim()
+def complete_with_retained_claims(f, *, expect_receipt=True, lease=None):
+    if lease is None:
+        lease = f.agent.claim()
     assert lease is not None
 
     def upload_payload(body):
