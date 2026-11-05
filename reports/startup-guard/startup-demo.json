@@ -1,0 +1,37 @@
+{
+  "audit_key_path": "/home/sam/galaxy-intentstack-startup-20261105/work/phase2-qualification-85d7764a108b4556b921e2cc774f185b/test_real_native_execution_req0/sink.key",
+  "audit_ledger_path": "/home/sam/galaxy-intentstack-startup-20261105/work/phase2-qualification-85d7764a108b4556b921e2cc774f185b/test_real_native_execution_req0/sink.db",
+  "audit_verification": {
+    "head_mac": "0370a9a1baa6236c74469c6b8a94c1a74fa9431f7cf909db5c4d47d6abcd571f",
+    "records": 4,
+    "status": "verified"
+  },
+  "native_passed": true,
+  "observation": {
+    "audit": {
+      "local_persisted": 4,
+      "pending": 0,
+      "remote_acknowledged": false,
+      "sink": "existing_local_joyevidence_hmac_ledger",
+      "sink_acknowledged": 4
+    },
+    "execution_id": "execution_c42a42577ec54ed1af98ce8ae408dea8",
+    "job_id": "job_e867911cb6df43e3936d3f3ebef9a268",
+    "job_state": "failed",
+    "operation_id": "operation-1",
+    "physical_attestation": "NOT_ESTABLISHED",
+    "receipt_commitment": "1c609bddd68a6641a3a2ea21f8d451da3f58e509b3e289fae6f17563903c9ec5",
+    "sandbox_execution_observed": true,
+    "sandbox_passed": true,
+    "semantic_acceptance": false
+  },
+  "physical_attestation": "NOT_ESTABLISHED",
+  "production_qualified": false,
+  "startup": {
+    "active_calls": 0,
+    "failure_type": null,
+    "production_qualified": false,
+    "ready": true,
+    "state": "READY"
+  }
+}

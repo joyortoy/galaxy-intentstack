@@ -1,0 +1,57 @@
+{
+  "audit_key_path": "/home/sam/galaxy-intentstack-startup-20261105/work/phase2-qualification-85d7764a108b4556b921e2cc774f185b/test_real_retrieval_revision_r0/sink.key",
+  "audit_ledger_path": "/home/sam/galaxy-intentstack-startup-20261105/work/phase2-qualification-85d7764a108b4556b921e2cc774f185b/test_real_retrieval_revision_r0/sink.db",
+  "audit_verification": {
+    "head_mac": "853f08168be4221c800179aff5f5ab656d06ace1a7b36dbc7be736cc3f99cfaf",
+    "records": 19,
+    "status": "verified"
+  },
+  "controller_accepted_job": "job_ee7d6dac625b426eb1a65893e9837ddd",
+  "graph": [
+    {
+      "claim_id": "07ee8ddf-e8ae-447d-8591-331a5b88f6e7",
+      "created": 1793840968.6417859,
+      "id": "fc247699-324b-4dc3-a954-9cde13689a26",
+      "revision": 3,
+      "session": "integration-session",
+      "source": "local-inference",
+      "status": "stale",
+      "subject": "derived",
+      "value": "de2c6f5e204b956111c4cbc0281789950828abcd8fdd754f1e94bb3e7ed8348e"
+    },
+    {
+      "claim_id": "8c195d29-2e87-4df3-b22d-2f88f7503bee",
+      "created": 1793840968.6338527,
+      "id": "35e0a9fa-cd02-4fd6-8c27-78a95956ecbe",
+      "revision": 3,
+      "session": "integration-session",
+      "source": "isolated-intentstack:source-author",
+      "status": "superseded",
+      "subject": "meeting.day",
+      "value": "monday"
+    },
+    {
+      "claim_id": "77725961-81b2-4059-b5aa-29a37124e867",
+      "created": 1793840968.976102,
+      "id": "b8ef4ad3-e32f-450e-b8fa-d9fc47348c35",
+      "revision": 1,
+      "session": "integration-session",
+      "source": "isolated-intentstack:source-author",
+      "status": "active",
+      "subject": "meeting.day",
+      "value": "tuesday"
+    }
+  ],
+  "native_revoked": true,
+  "pending_before_forwarding": 1,
+  "production_qualified": false,
+  "revocation": {
+    "authority": "existing JoyCtl native grant store",
+    "errors": [],
+    "native_acknowledged": 1,
+    "pending": 0,
+    "requested": 1
+  },
+  "scope": "composed isolated owner, real retrieval revision and native grant revocation",
+  "worker_attempts": 0
+}

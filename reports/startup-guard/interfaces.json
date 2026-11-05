@@ -1,0 +1,26 @@
+{
+  "python": "3.13.7",
+  "platform": "Linux-6.17.0-41-generic-x86_64-with-glibc2.42",
+  "modules": {
+    "galaxy_intentstack.startup": {
+      "installed_path": "/home/sam/galaxy-intentstack-startup-20261105/.venv-phase2/lib/python3.13/site-packages/galaxy_intentstack/startup.py",
+      "sha256": "b04bdc0daa25f318f25cb1fa68b145830bc33738191461aabf6a73655df76326",
+      "source_matches": true
+    },
+    "galaxy_intentstack.controller": {
+      "installed_path": "/home/sam/galaxy-intentstack-startup-20261105/.venv-phase2/lib/python3.13/site-packages/galaxy_intentstack/controller.py",
+      "sha256": "175d0a0f746b072942feb37d0d184f25f1bea3c7c49065da190538ebaaacbcd8",
+      "source_matches": true
+    },
+    "galaxy_intentstack.revocation": {
+      "installed_path": "/home/sam/galaxy-intentstack-startup-20261105/.venv-phase2/lib/python3.13/site-packages/galaxy_intentstack/revocation.py",
+      "sha256": "69d0db12b52c3e9ad74061526352aa2f0590323afa0cbd4984ed541edc4e6ef3",
+      "source_matches": true
+    }
+  },
+  "upstream_paths": {
+    "joyctl": "/home/sam/galaxy-intentstack-startup-20261105/.venv-phase2/lib/python3.13/site-packages/joyctl/__init__.py",
+    "intentstack": "/home/sam/galaxy-intentstack-startup-20261105/.venv-phase2/lib/python3.13/site-packages/intentstack/__init__.py",
+    "joyevidence": "/home/sam/galaxy-intentstack-startup-20261105/.venv-phase2/lib/python3.13/site-packages/joyevidence/__init__.py"
+  }
+}

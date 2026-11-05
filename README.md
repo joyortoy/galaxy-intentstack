@@ -6,6 +6,14 @@ dependency-aware belief revision and deterministic authorization. No model API i
 **Milestone:** local vertical slice, not production certified. The language detector is a small
 rule set; it is not a general truth oracle or a psychological assessment tool.
 
+## Guarded-startup follow-up
+
+The isolated host now starts closed and gates native queueing, worker claims and verification
+recovery on healthy dependency and authenticated audit composition. Health failures latch closed;
+healthy draining retains custody facts for fresh-host recovery. See [design and reproduction](docs/startup-guard.md)
+and [qualification](reports/startup-guard/qualification.md). Production startup/deployment,
+identity and physical attestation remain unqualified.
+
 ## Dependency-revocation follow-up
 
 The isolated controller now checks committed belief dependencies at native grant-validation

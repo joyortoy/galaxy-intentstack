@@ -1,0 +1,19 @@
+Processing /home/sam/galaxy-intentstack-startup-20261105
+  Installing build dependencies: started
+  Installing build dependencies: finished with status 'done'
+  Getting requirements to build wheel: started
+  Getting requirements to build wheel: finished with status 'done'
+  Preparing metadata (pyproject.toml): started
+  Preparing metadata (pyproject.toml): finished with status 'done'
+Building wheels for collected packages: galaxy-intentstack
+  Building wheel for galaxy-intentstack (pyproject.toml): started
+  Building wheel for galaxy-intentstack (pyproject.toml): finished with status 'done'
+  Created wheel for galaxy-intentstack: filename=galaxy_intentstack-0.1.0-py3-none-any.whl size=36644 sha256=b6e0bbaadc95ffd31aabc2d72c051d56bb80c0dabcf882de4e9625da9371fbfe
+  Stored in directory: /home/sam/.cache/pip/wheels/35/f7/18/0a701ef0a0f9b214613fe31c554e2c13c6faf3bb8368807755
+Successfully built galaxy-intentstack
+Installing collected packages: galaxy-intentstack
+  Attempting uninstall: galaxy-intentstack
+    Found existing installation: galaxy-intentstack 0.1.0
+    Uninstalling galaxy-intentstack-0.1.0:
+      Successfully uninstalled galaxy-intentstack-0.1.0
+Successfully installed galaxy-intentstack-0.1.0
