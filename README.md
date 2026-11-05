@@ -3,8 +3,60 @@
 A working local integrity layer for AI agents: durable evidence, conservative interpretation,
 dependency-aware belief revision and deterministic authorization. No model API is required.
 
-**Milestone:** local vertical slice, not production certified. The language detector is a small
-rule set; it is not a general truth oracle or a psychological assessment tool.
+## Current status
+
+The isolated local-development integration is implemented and tested. **169 tests pass** across
+core policy, real ecosystem integration, dependency revocation, guarded startup and eight
+hard-process-exit recovery cases. Production qualification and physical attestation remain
+unestablished. The language detector is a small rule set, not a general truth oracle or a
+psychological assessment tool.
+
+| Validation mode | What runs | Measured time on joy | Test storage |
+| --- | --- | --- | --- |
+| Routine quick check | All 169 tests, lint, formatting, benchmarks and independent audit checks | 17.44 seconds total | Temporary, memory-backed on joy |
+| Full qualification | Same checks with persistent test storage | 177.50 seconds for tests | Checkout work directory on disk |
+
+Measurements are from 2026-11-05 on Linux / Python 3.13.7. Quick mode does not qualify durable
+storage or power-loss behavior. See [full qualification](reports/startup-guard/qualification.md)
+and [quick-check evidence](reports/quick-check/qualification.md).
+
+## How it works
+
+1. **Collect evidence.** IntentStack supplies source records and memories. Galaxy tracks their
+   provenance, uncertainty, contradictions and belief dependencies.
+2. **Evaluate an action.** Deterministic policy returns ALLOW, DENY, CLARIFY, ABSTAIN or ESCALATE.
+   Confidence and retrieved text cannot create execution authority.
+3. **Authorize and execute.** JoyCtl independently validates its native grant and admitted compiled
+   plan. JoyMux handles runtime placement through Unix sockets.
+4. **Invalidate stale support.** Retraction, dispute or correction blocks dependent authority and
+   creates durable revocation work for JoyCtl. Pending forwarding still blocks affected leases.
+5. **Verify and audit.** JoyCtl retains custody facts and verifies execution; JoyEvidence supplies
+   the authenticated audit trail. Command success does not establish semantic acceptance,
+   independent human review or physical attestation.
+
+The guarded host starts closed. Queueing, worker claims and verification recovery require healthy
+dependency and audit composition. Health failures latch it closed; a fresh successful bootstrap is
+required. Healthy draining retains in-flight custody evidence for later verification.
+
+## Run the ecosystem checks
+
+On the existing host joy:
+
+```sh
+cd /home/sam/galaxy-intentstack-startup-20261105
+# Routine feedback, about 17 seconds in the recorded run:
+.venv-phase2/bin/python scripts/qualify_phase2.py --quick
+
+# Persistent-storage qualification, about three minutes in the recorded run:
+.venv-phase2/bin/python scripts/qualify_phase2.py --output reports/startup-guard
+```
+
+Both modes print progress and elapsed time. Quick results default to reports/quick-check;
+full results use the directory specified above. For a new environment, follow the
+[ecosystem setup and requirements](docs/phase2-reproduction.md) and
+[guarded startup instructions](docs/startup-guard.md). The separate upstream repositories,
+Linux sandbox tools and a built JoyLang kernel are required for ecosystem qualification.
+The standalone core setup is documented below.
 
 ## Guarded-startup follow-up
 
@@ -40,7 +92,7 @@ queue consumption, a private real JoyMux Unix daemon, JoyCtl custody/Linux sandb
 and JoyEvidence HMAC delivery. Production mode and missing physical attestation fail closed.
 See [Phase 2 qualification](reports/phase2/qualification.md),
 [architecture](docs/phase2-architecture.md) and [exact reproduction commands](docs/phase2-reproduction.md).
-No production deployment or GitHub push is authorized or performed.
+The source and recorded evidence are published on GitHub. No production deployment has been performed.
 
 ## Install and verify
 
